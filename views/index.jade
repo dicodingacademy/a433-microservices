@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  .container(ng-app="accumulatorApp")
+    h1= title
+    div#env-notice= environmentNotice
+    div#server-notice= localAddress
+    p Masukkan item yang ingin Anda tampilkan
+    div(ng-controller="AccumulatorController", data-ng-init="init()")
+      form(ng-submit="add()")
+        input(type="text", placeholder="Ketik di sini", ng-model="item")
+        // disable button if item is empty or controller is not enabled
+        input.btn-primary(type="submit", value="Tambahkan", ng-disabled="!item.length || !enabled")
+      ul
+        li(ng-repeat="item in accumulator track by $index")
+          | {{item.message}}
