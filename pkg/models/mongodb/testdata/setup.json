@@ -1,0 +1,27 @@
+[{
+    "_id": {
+      "$oid": "5ffd1349c3a9505cefe93c6c"
+    },
+    "company": "Nothinux",
+    "role": "Software Engineer",
+    "location": "Bandung",
+    "description": "as software engineer you must",
+    "status": true,
+    "published_at": {
+      "$date": "2021-02-27T17:00:00Z"
+    },
+    "job_id": 1
+  },{
+    "_id": {
+      "$oid": "5ffd1404e0976d24b5d0f0f5"
+    },
+    "company": "Avenger Inc",
+    "role": "DevOps Engineer",
+    "location": "Bandung",
+    "description": "as devops engineer you must",
+    "status": true,
+    "published_at": {
+      "$date": "2021-02-27T17:00:00Z"
+    },
+    "job_id": 2
+}]
