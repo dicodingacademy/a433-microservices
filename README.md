@@ -1,5 +1,5 @@
-# a433-microservices
-Repository ini digunakan untuk kebutuhan kelas Belajar Membangun Arsitektur Microservices
+# starter
+Repository ini digunakan untuk kebutuhan mengerjakan Submission pertama kelas Belajar Membangun Arsitektur Microservices
 
 Silakan clone dengan perintah berikut.<br>
-`git clone -b proyek-pertama https://github.com/dicodingacademy/a433-microservices.git`
+`git clone -b proyek-pertama https://github.com/Hyedra64/starter.git`
