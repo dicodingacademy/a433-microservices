@@ -1,0 +1,55 @@
+# schema version dari Docker Compose
+version: "3.7"
+
+# pendefinisian service yang diperlukan untuk menjalankan aplikasi
+services:
+
+  # service pertama yang akan definisikan sebagai item-app
+  item-app:
+
+    # menggunakan base image dengan namespace filahaditia dengan repository item-app dan tag v1 dari Github Packages
+    image: ghcr.io/filahaa/item-app:v1
+
+    # menginstal dependencies untuk production dan kemudian build aplikasi
+    command: sh -c "npm install --production --unsafe-perm && npm run build"
+
+    # melakukan port mapping agar dapat diakses dari port 80 di host
+    ports:
+      - 80:8080
+    
+    # menentukan working directory untuk container ke /app
+    working_dir: /app
+
+    # menggunakan bind mount untuk memasang current directory di host ke /app di container
+    volumes:
+      - ./:/app
+    
+    # menentukan sejumlah environment variable
+    environment:
+      NODE_ENV: production
+      DB_HOST: item-db
+    
+    # menerapkan restart policy agar container selalu restart ketika terhenti
+    restart: always
+
+    # menjalan service item-app setelah service item-db diluncurkan
+    depends_on:
+      item-db:
+        condition: service_started
+
+  # service pertama yang akan definisikan sebagai item-db
+  item-db:
+
+    # mengunduh/mengambil base image bernama mongo dari Docker Hub dengan tag 3
+    image: mongo:3
+
+    # menerapkan restart policy agar container selalu restart ketika terhenti
+    restart: always
+
+    # memakai volume bernama app-db dan memasangnya ke directory /data/db di container
+    volumes:
+      - app-db:/data/db
+
+# membuat volume baru bernama app-db
+volumes:
+  app-db:
