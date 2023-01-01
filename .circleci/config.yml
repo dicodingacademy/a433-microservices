@@ -3,22 +3,22 @@
 version: 2.1
 orbs:
   docker: circleci/docker@2.2.0
-jobs:
-  lint-dockerfile:
-    executor: docker/machine
-    steps:
-      - checkout
-      - docker/dockerlint:
-          dockerfile: ./Dockerfile
-          treat-warning-as-errors: true
-  test-app:
-    docker: 
-      - image: golang:bullseye
-    steps:
-      - checkout
-      - run:
-          name: run test
-          command: go test -v -short --count=1 $(go list ./...)
+  jobs:
+    lint-dockerfile:
+      executor: docker/machine
+      steps:
+        - checkout
+        - docker/dockerlint:
+            dockerfile: ./Dockerfile
+            treat-warning-as-errors: true
+    test-app:
+      docker: 
+        - image: golang:bullseye
+      steps:
+        - checkout
+        - run:
+            name: run test
+            command: go test -v -short --count=1 $(go list ./...)
 
 workflows:
   version: 2
