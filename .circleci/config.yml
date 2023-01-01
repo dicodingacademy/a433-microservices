@@ -9,8 +9,8 @@ jobs:
     steps:
       - checkout
       - docker/dockerlint:
-          dockerfile: ./dockerfile
-          treat-warning-as-erros: true
+          dockerfile: ./Dockerfile
+          treat-warning-as-errors: true
   test-app:
     docker: 
       - image: golang:bullseye
@@ -21,6 +21,7 @@ jobs:
           command: go test -v -short --count=1 $(go list ./...)
 
 workflows:
+  version: 2
   workflow:
     jobs:
       - lint-dockerfile
