@@ -21,8 +21,9 @@ jobs:
           command: go test -v -short --count=1 $(go list ./...)
 
 workflows:
-  jobs:
-    - lint-dockerfile
-    - test-app
+  workflow:
+    jobs:
+      - lint-dockerfile
+      - test-app
   
 
