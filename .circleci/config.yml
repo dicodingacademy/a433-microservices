@@ -20,11 +20,11 @@ orbs:
   #         name: run test
   #         command: go test -v -short --count=1 $(go list ./...)
 
-  workflows:
-    version: 2
-    workflow:
-      jobs:
-        - lint-dockerfile
-        - test-app
+workflows:
+  version: 2
+  my-workflow:
+    jobs:
+      - lint-dockerfile
+      - test-app
   
 
