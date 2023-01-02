@@ -29,7 +29,7 @@ jobs:
           name: push image
           command: |
             echo $PA_TOKEN | sudo docker login ghcr.io -u imamd1 --password-stdin
-            docker push ghcr.io/imamd1/karsajobs:latest
+            sudo docker push ghcr.io/imamd1/karsajobs:latest
 workflows:
   version: 2
   workflow:
