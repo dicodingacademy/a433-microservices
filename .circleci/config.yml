@@ -1,28 +1,79 @@
-# version of circleCI
-
 version: 2.1
 orbs:
   docker: circleci/docker@2.2.0
-  jobs:
-    lint:
-      executor: docker/machine
-      steps:
-        - checkout
-        - docker/dockerlint:
-            dockerfile: ./Dockerfile
-            treat-warning-as-errors: true
-  # test-app:
-  #   docker: 
-  #     - image: golang:bullseye
-  #   steps:
-  #     - checkout
-  #     - run:
-  #         name: run test
-  #         command: go test -v -short --count=1 $(go list ./...)
+jobs:
+  lint-dockerfile:
+    executor: docker/machine
+    steps:
+      - checkout
+      - docker/dockerlint:
+          dockerfile: ./Dockerfile
+          treat-warnings-as-errors: true
+  test-app:
+    docker: 
+      - image: golang:bullseye
+    steps:
+      - checkout
+      - run:
+          name: run test
+          command: go test -v -short --count=1 $(go list ./...)
+  build-app-karsajobs:
+    executor: docker/docker
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: build image
+          command: docker build -t ghcr.io/imamd1/karsajobs:latest .
+      - deploy:
+          name: push image
+          command: |
+            echo $PA_TOKEN | sudo docker login ghcr.io -u imamd1 --password-stdin
+            docker push ghcr.io/imamd1/karsajobs:latest
 workflows:
-  my-workflow:
+  version: 2
+  workflow:
     jobs:
-      - lint
-      # - test-app
+      - lint-dockerfile
+      - test-app
+      - build-app-karsajobs
+#   jobs:
+#     lint:
+#       executor: docker/machine
+#       steps:
+#         - checkout
+#         - docker/dockerlint:
+#             dockerfile: ./Dockerfile
+#             treat-warnings-as-errors: true
+# workflows:
+#   lint:
+#     jobs:
+#       - lint
+
+# # version of circleCI
+# version: 2.1
+# orbs:
+#   docker: circleci/docker@2.2.0
+# jobs:
+#   lint:
+#       # executor: docker/machine
+#     steps:
+#       - checkout
+#         # - docker/dockerlint:
+#         #     dockerfile: ./Dockerfile
+#         #     treat-warning-as-errors: true
+#   # test-app:
+#   #   docker: 
+#   #     - image: golang:bullseye
+#   #   steps:
+#   #     - checkout
+#   #     - run:
+#   #         name: run test
+#   #         command: go test -v -short --count=1 $(go list ./...)
+# workflows:
+#   my-workflow:
+#     jobs:
+#       - lint
+#       # - test-app
   
 
