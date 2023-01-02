@@ -25,12 +25,12 @@ jobs:
       - run:
           name: build image
           command: |
-            docker build -t ghcr.io/$username/karsajobs:latest .
+            docker build -t ghcr.io/$uname/karsajobs:latest .
       - deploy:
           name: push image
           command: |
-            echo $PA_TOKEN | docker login ghcr.io -u $username --password-stdin
-            docker push ghcr.io/$username/karsajobs:latest
+            echo $PA_TOKEN | docker login ghcr.io -u $uname --password-stdin
+            docker push ghcr.io/$uname/karsajobs:latest
 workflows:
   version: 2
   workflow:
