@@ -24,7 +24,8 @@ jobs:
       - setup_remote_docker
       - run:
           name: build image
-          command: docker build -t ghcr.io/imamd1/karsajobs:latest .
+          command: |
+            docker build -t ghcr.io/imamd1/karsajobs:latest .
       - deploy:
           name: push image
           command: |
