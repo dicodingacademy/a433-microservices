@@ -1,0 +1,54 @@
+version: "3.7"
+
+services:
+
+  item-db:
+
+    image: mongo:3
+
+    volumes:
+
+      - app-db:/data/db
+
+    environment:
+
+      MONGO_INITDB_DATABASE: app-db
+
+      MONGO_INITDB_ROOT_USERNAME: admin
+      
+      MONGO_INITDB_ROOT_PASSWORD: admin
+      
+    ports:
+      - 27017:27017
+
+  item-app:
+
+    build: ./item-app
+
+    image: ghcr.io/bagus-k/item-app:v1
+
+    container_name: item-app
+
+    ports:
+
+      - 8080:8080
+
+    working_dir: /app
+
+    volumes:
+
+      - ./:/app
+
+    environment:
+
+      MONGO_SERVER: item-db
+
+      MONGO_INITDB_DATABASE: app-db
+
+      MONGO_INITDB_ROOT_USERNAME: admin
+
+      MONGO_INITDB_ROOT_PASSWORD: admin
+
+volumes:
+
+  app-db:
