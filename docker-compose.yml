@@ -1,0 +1,42 @@
+# schema version
+version: '3.7'
+
+# services yang digunakan untuk aplikasi item-app
+services:
+    # service item-app
+    item-app:
+        # nama image yang digunakan yang berada di Github Packages
+        image: ghcr.io/trisnanto/item-app:v1
+        # daftar perintah yang dijalankan setelah pembuatan container
+        command: sh -c "npm install --production --unsafe-perm && npm run build && npm run start"
+        # mapping port untuk akses aplikasi melalui localhost
+        ports:
+            - 80:8080
+        # menetapkan working directory pada container
+        working_dir: /app
+        # bind mount current directory ke directory app didalam container
+        volumes:
+            - ./:/app
+        # mengatur agar container selalu direstart apabila terhenti
+        deploy:
+            restart_policy:
+                condition: any
+        # service item-app hanya dibuat dan dijalankan setelah service item-db dibuat dan berjalan
+        depends_on:
+            - item-db
+
+    # service item-db
+    item-db:
+        # menggunakan image mongodb tag 3
+        image: mongo:3
+        # bind volume bernama app-db ke directory /data/db didalam container
+        volumes:
+            - app-db:/data/db
+        # mengatur agar container selalu direstart apabila terhenti
+        deploy:
+            restart_policy:
+                condition: any
+
+# membuat volume bernama app-db
+volumes:
+    app-db:
