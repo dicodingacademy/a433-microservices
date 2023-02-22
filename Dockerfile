@@ -1,5 +1,5 @@
 # menggunakan node versi 14 alpine
-FROM node:14.21.3-alpine
+FROM node:14.21.2-alpine
 
 # Menentukan working directory container adalah /app
 WORKDIR /app

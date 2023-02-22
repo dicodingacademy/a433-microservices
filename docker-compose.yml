@@ -2,10 +2,13 @@ version: "3.7"
 
 services:
 
-  item-db:
+  #service item-db
+  item-db:                  
 
+    #Menggunakan image mongo:3 dari Docker Hub
     image: mongo:3
 
+    #Memakai volume bernama app-db dengan target /data/db di container.
     volumes:
 
       - app-db:/data/db
@@ -13,12 +16,15 @@ services:
     ports:
       - 27017:27017
 
-  item-app:
+  #service item-app
+  item-app:                
 
+    # Menggunakan image item-app dari GitHub Packages
     image: ghcr.io/bagus-k/item-app:v1
 
     container_name: item-app
 
+    #port mapping agar dapat diakses dari port 80 di host
     ports:
 
       - 80:80
@@ -26,7 +32,8 @@ services:
     volumes:
 
       - ./:/app
-
+      
+    restart: on-failure
 volumes:
 
   app-db:
