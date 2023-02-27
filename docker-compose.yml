@@ -27,12 +27,13 @@ services:
     #port mapping agar dapat diakses dari port 80 di host
     ports:
 
-      - 80:80
+      - 80:8080
 
     volumes:
 
       - ./:/app
-      
+
+      #restart container
     restart: on-failure
 volumes:
 
