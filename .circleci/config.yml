@@ -1,0 +1,31 @@
+version: 2.1
+
+jobs:
+  lint-dockerfile:
+    docker:
+      - image: docker:stable
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Run hadolint
+          command: docker run --rm --interactive hadolint/hadolint < Dockerfile
+  build-app-karsajobs-ui:
+    docker:
+      - image: docker:stable
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Publish Docker Image
+          command: |
+            docker build -t karsajobs-ui .
+            docker tag karsajobs-ui ghcr.io/rickybeatus/karsajobs-ui
+            echo $DOCKER_PASSWORD | docker login ghcr.io -u rickybeatus --password-stdin
+            docker push ghcr.io/rickybeatus/karsajobs-ui
+
+workflows:
+  lint_test:
+    jobs:
+      - lint-dockerfile
+      - build-app-karsajobs-ui
