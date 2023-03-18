@@ -25,7 +25,7 @@ jobs:
             docker push ghcr.io/rickybeatus/karsajobs-ui
 
 workflows:
-  lint_test:
+  karsajobs-ui:
     jobs:
       - lint-dockerfile
       - build-app-karsajobs-ui
