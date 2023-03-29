@@ -43,6 +43,6 @@ const createOrder = async order => {
 };
 
 app.listen(process.env.PORT, () => {
-    console.log(`Server at ${process.env.PORT}`);
+    console.log(`Server running at ${process.env.PORT}`);
 });
 
