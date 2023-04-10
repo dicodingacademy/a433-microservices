@@ -7,7 +7,7 @@ const bp = require("body-parser");
 app.use(bp.json());
 
 const amqp = require("amqplib");
-const amqpServer = process.env.AMQPURL;
+const amqpServer = process.env.AMQP_URL;
 var channel, connection;
 
 connectToQueue();
