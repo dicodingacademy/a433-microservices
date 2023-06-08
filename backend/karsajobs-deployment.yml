@@ -23,7 +23,7 @@ spec:
     #* Define the metadata of the pod
     metadata:
       labels:
-        app: backend
+        app: karsajobs-backend
     spec:
       #* Define the containers that the pod should run
       containers:
