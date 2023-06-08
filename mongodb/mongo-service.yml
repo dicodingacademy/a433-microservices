@@ -1,0 +1,19 @@
+#* Define the API version of the Service
+apiVersion: v1
+#* Define the kind of the Service
+kind: Service
+#* Define the metadata of the Service
+metadata:
+  name: mongo-service
+  labels:
+    app: mongodb
+#* Define the specification of the Service
+spec:
+  #* Define the ports that the Service should expose
+  ports:
+    - port: 27017
+  #* Define the selector that the Service will use to select or filter the pods that it will expose
+  selector:
+    app: mongodb
+  #* Define the type of the Service
+  type: NodePort

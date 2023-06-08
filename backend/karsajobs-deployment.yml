@@ -1,0 +1,56 @@
+#* Specify the API version of the Kubernetes resource
+apiVersion: apps/v1
+#* Specify the kind of the Kubernetes resource
+kind: Deployment
+#* Define the metadata of the Deployment resource
+metadata:
+  #* Specify the name of the Deployment
+  name: karsajobs-deployment
+  #* Define the labels that can be used to select or filter this resource
+  labels:
+    app: karsajobs-backend
+#* Define the specification of the Deployment resource
+spec:
+  #* Define the number of replicas that the Deployment should create
+  replicas: 1
+  #* Define the selector that the Deployment will use to select or filter the pods that it will manage
+  selector:
+    #* Define the labels that the Deployment will use to select or filter the pods that it will manage
+    matchLabels:
+      app: karsajobs-backend
+  #* Define the template that the Deployment will use to create the pods that it will manage
+  template:
+    #* Define the metadata of the pod
+    metadata:
+      labels:
+        app: backend
+    spec:
+      #* Define the containers that the pod should run
+      containers:
+        #* Define the container that the pod should run
+        - name: karsajobs
+          #* Define the image that the container should use
+          image: 70k0b0d0/karsajobs:latest
+          #* Specify the policy that the image will only be pulled if it's not already present on the node
+          imagePullPolicy: IfNotPresent
+          #* Define the ports that the container exposes
+          ports:
+            - containerPort: 8080
+          #* Define the environment variables that the container should use
+          env:
+            - name: APP_PORT
+              value: "8080"
+            - name: MONGO_HOST
+              value: "mongo"
+            - name: MONGO_USER
+              valueFrom:
+                #* Get value from mongo-secret
+                secretKeyRef:
+                  name: mongo-secret
+                  key: MONGO_ROOT_USERNAME
+            - name: MONGO_PASS
+              valueFrom:
+                #* Get value from mongo-secret
+                secretKeyRef:
+                  name: mongo-secret
+                  key: MONGO_ROOT_PASSWORD

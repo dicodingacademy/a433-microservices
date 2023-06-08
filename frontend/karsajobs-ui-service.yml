@@ -1,0 +1,21 @@
+#* Specify the API version for the Service resource
+apiVersion: v1
+#* Specify the kind of the Service resource
+kind: Service
+#* Define the metadata of the Service resource
+metadata:
+  #* Define the name of the Service
+  name: karsajobs-ui-service
+  #* Define the labels that can be used to select or filter this resource
+  labels:
+    app: karsajobs-frontend
+#* Define the specification of the Service resource
+spec:
+  #* Define the ports that the Service should expose
+  ports:
+    - port: 8000
+  #* Define the selector that the Service will use to select or filter the pods that it will expose
+  selector:
+    app: karsajobs-frontend
+  #* Define the type of the Service
+  type: NodePort

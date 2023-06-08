@@ -1,0 +1,60 @@
+#* Specify the API version of the Kubernetes resource
+apiVersion: apps/v1
+#* Specify the kind of the Kubernetes resource
+kind: StatefulSet
+#* Define metadata for the StatefulSet resource
+metadata:
+  name: mongo-statefulset
+  labels:
+    app: mongo
+#* Define the specification of the StatefulSet resource
+spec:
+  selector:
+    #* Define the selector that the StatefulSet will use to select or filter the pods that it will manage
+    matchLabels:
+      app: mongodb
+  serviceName: mongo-service
+  #* Define the number of replicas that the StatefulSet should create
+  replicas: 1
+  #* Set the minimum amount of time that must pass before the pods are considered ready
+  minReadySeconds: 10
+  #* Define the template that the StatefulSet will use to create the pods that it will manage
+  template:
+    metadata:
+      labels:
+        app: mongodb
+    spec:
+      #* Set after a container is terminated, the kubelet will wait for 10 seconds before forcefully killing the container
+      terminationGracePeriodSeconds: 10
+      #* Define the containers that the pod should run
+      containers:
+        #* Define the container that the pod should run
+        - name: mongodb
+          #* Specify the image that the container should use
+          image: mongo:latest
+          #* Specify the policy that the image will only be pulled if it's not already present on the node
+          imagePullPolicy: IfNotPresent
+          #* Define the environment variables that the container should use
+          env:
+            - name: MONGO_INITDB_ROOT_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-secret
+                  key: mongodb-username
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-secret
+                  key: mongodb-password
+          #* Define the ports that the container exposes
+          ports:
+            - containerPort: 27017
+          #* Define the volume mounts that the container should use
+          volumeMounts:
+            - name: mongo-persistent-storage
+              mountPath: /data/db
+      #* Define the volumes that the pod should use
+      volumes:
+        - name: mongo-persistent-storage
+          persistentVolumeClaim:
+            claimName: mongo-pvc

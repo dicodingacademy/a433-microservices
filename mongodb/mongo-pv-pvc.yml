@@ -1,0 +1,41 @@
+#* Specify the API version for the Persistent Volume resource
+apiVersion: v1
+#* Specify the kind of the Kubernetes resource
+kind: PersistentVolume
+#* Define metadata for the Persistent Volume resource
+metadata:
+  name: mongo-pv
+  labels:
+    type: local
+spec:
+  #* Set storage class name
+  storageClassName: manual
+  #* Define the storage capacity needed by the PV
+  capacity:
+    storage: 1Gi
+  #* Set PV can be accessed in ReadWriteOnce mode
+  accessModes:
+    - ReadWriteOnce
+  #* Define the host path
+  hostPath:
+    path: "/data/db"
+---
+#* Specify the API version for the Persistent Volume Claim resource
+apiVersion: v1
+#* Specify the kind of the Kubernetes resource
+kind: PersistentVolumeClaim
+#* Define metadata for the Persistent Volume Claim resource
+metadata:
+  name: mongo-pvc
+  labels:
+    app: mongo
+spec:
+  #* Set storage class name
+  storageClassName: manual
+  #* Set access mode to ReadWriteOnce
+  accessModes:
+    - ReadWriteOnce
+  #* Define the storage capacity needed by the PVC
+  resources:
+    requests:
+      storage: 1Gi

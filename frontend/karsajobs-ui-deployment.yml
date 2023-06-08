@@ -1,0 +1,38 @@
+#* Specify the API version for the Kubernetes resource
+apiVersion: apps/v1
+#* Specify the kind of the Kubernetes resource
+kind: Deployment
+#* Define the metadata of the Deployment resource
+metadata:
+  #* Specify the name of the Deployment
+  name: karsajobs-ui-deployment
+  #* Define the labels that can be used to select or filter this resource
+  labels:
+    app: frontend
+#* Define the specification of the Deployment resource
+spec:
+  #* Define the number of replicas that the Deployment should create
+  replicas: 1
+  #* Define the selector that the Deployment will use to select or filter the pods that it will manage
+  selector:
+    #* Define the labels that the Deployment will use to select or filter the pods that it will manage
+    matchLabels:
+      app: karsajobs-frontend
+  #* Define the template that the Deployment will use to create the pods that it will manage
+  template:
+    #* Define the metadata of the pod
+    metadata:
+      labels:
+        app: karsajobs-frontend
+    spec:
+      #* Define the containers that the pod should run
+      containers:
+        #* Define the container that the pod should run
+        - name: karsajobs-ui
+          #* Define the image that the container should use
+          image: 70k0b0d0/karsajobs-ui:latest
+          #* Specify the policy that the image will only be pulled if it's not already present on the node
+          imagePullPolicy: IfNotPresent
+          #* Define the ports that the container exposes
+          ports:
+            - containerPort: 8000

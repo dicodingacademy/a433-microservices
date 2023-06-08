@@ -1,0 +1,24 @@
+# Files generated during Kubernetes deployment
+kube-*.yaml
+
+*.yaml
+*.json
+
+# Temporary files
+*.log
+*.tmp
+
+# Compiled binaries
+*.exe
+*.dll
+*.so
+*.dylib
+
+# IDE-specific files and directories
+.vscode/
+.idea/
+*.iml
+
+# Dependency directories
+vendor/
+node_modules/
