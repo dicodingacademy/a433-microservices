@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: karsajobs  # Menetapkan nama untuk deployment karsajobs
+  labels:
+    app: karsajobs  # Menetapkan label aplikasi karsajobs
+    tier: backend  # Menetapkan label tier backend
+
+spec:
+  selector:
+    matchLabels:
+      app: karsajobs  # Menetapkan selector sesuai label aplikasi karsajobs
+      tier: backend  # Menetapkan selector sesuai label tier backend
+  
+  replicas: 1  # Menetapkan jumlah replika (instance) yang akan dibuat
+
+  template:
+    metadata:
+      labels:
+        app: karsajobs  # Menetapkan label aplikasi pada template pod
+        tier: backend  # Menetapkan label tier pada template pod
+    spec:
+      containers:
+        - name: karsajobs  # Menetapkan nama container menjadi karsajobs
+          image: ghcr.io/dionanda/karsajobs:latest  # Menggunakan image container dari repositori ghcr.io/dionanda/karsajobs dengan tag latest
+          ports:
+            - containerPort: 8080  # Mengatur port yang akan di-forward ke dalam container
+          env:
+            - name: APP_PORT  # Menetapkan variabel lingkungan untuk port aplikasi
+              value: "8080"  # Menetapkan nilai port aplikasi
+            - name: MONGO_HOST  # Menetapkan variabel lingkungan untuk alamat host MongoDB
+              value: "mongodb"  # Menetapkan nilai alamat host MongoDB
+            - name: MONGO_USER  # Menetapkan variabel lingkungan untuk pengguna MongoDB
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-secret  # Mengambil nilai dari secret dengan nama mongo-secret
+                  key: MONGO_ROOT_USERNAME  # Menggunakan key MONGO_ROOT_USERNAME dari secret
+            - name: MONGO_PASS  # Menetapkan variabel lingkungan untuk kata sandi MongoDB
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-secret  # Mengambil nilai dari secret dengan nama mongo-secret
+                  key: MONGO_ROOT_PASSWORD  # Menggunakan key MONGO_ROOT_PASSWORD dari secret

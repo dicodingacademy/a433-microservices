@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb  # Menetapkan nama untuk Service mongodb
+  labels:
+    app: karsajobs  # Menetapkan label aplikasi karsajobs
+    tier: database  # Menetapkan label tier database
+
+spec:
+  selector:
+    app: karsajobs  # Selector sesuai label aplikasi karsajobs
+    tier: database  # Selector sesuai label tier database
+  ports:
+    - port: 27017  # Menetapkan port yang akan di-forward oleh Service
+  clusterIP: None  # Menetapkan tipe IP cluster sebagai None (tidak diberikan IP Cluster)

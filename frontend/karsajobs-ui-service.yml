@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: karsajobs-ui  # Menetapkan nama untuk Service karsajobs-ui
+  labels:
+    app: karsajobs  # Menetapkan label aplikasi karsajobs
+    tier: frontend  # Menetapkan label tier frontend
+
+spec:
+  selector:
+    app: karsajobs  # Selector sesuai label aplikasi karsajobs
+    tier: frontend  # Selector sesuai label tier frontend
+  ports:
+  - port: 8000  # Menetapkan port yang akan di-forward oleh Service
+  type: NodePort  # Menetapkan tipe Service sebagai NodePort

@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mongodb  # Menetapkan nama untuk StatefulSet mongodb
+  labels:
+    app: karsajobs  # Menetapkan label aplikasi karsajobs
+    tier: database  # Menetapkan label tier database
+
+spec:
+  selector:
+    matchLabels:
+      app: karsajobs  # Selector sesuai label aplikasi karsajobs
+      tier: database  # Selector sesuai label tier database
+  serviceName: mongodb  # Menetapkan nama Service yang digunakan untuk mengakses StatefulSet
+  replicas: 1  # Jumlah replika (instance) yang akan dibuat
+  minReadySeconds: 10  # Waktu minimum yang harus melewati sebelum replika dianggap siap
+
+  template:  # Konfigurasi untuk template pod dalam StatefulSet
+    metadata:
+      labels:
+        app: karsajobs  # Menetapkan label aplikasi pada template pod
+        tier: database  # Menetapkan label tier pada template pod
+    spec:
+      terminationGracePeriodSeconds: 10  # Waktu yang diberikan untuk graceful termination sebelum pod dihentikan
+      containers:
+      - name: mongodb  # Menetapkan nama container sebagai mongodb
+        image: mongo:latest  # Menggunakan image dari repositori Docker "mongo" dengan tag latest
+        ports:
+        - containerPort: 27017  # Mengatur port yang akan di-forward oleh container
+          name: mongo  # Memberi nama port container sebagai "mongo"
+        env:  # Variabel lingkungan yang akan diatur dalam container
+        - name: MONGO_INITDB_ROOT_USERNAME_FILE  # Menetapkan nama variabel lingkungan
+          value: /etc/mongo-credentials/MONGO_ROOT_USERNAME  # Menetapkan nilai variabel lingkungan
+        - name: MONGO_INITDB_ROOT_PASSWORD_FILE  # Menetapkan nama variabel lingkungan
+          value: /etc/mongo-credentials/MONGO_ROOT_PASSWORD  # Menetapkan nilai variabel lingkungan
+        volumeMounts:  # Mounting volume ke dalam container
+        - name: mongo-persistent-storage  # Menetapkan nama volume yang akan di-mount
+          mountPath: /data/db  # Mount path di dalam container
+        - name: mongo-config  # Menetapkan nama volume yang akan di-mount
+          mountPath: /config  # Mount path di dalam container
+          readOnly: true  # Hanya mode baca untuk volume ini
+        - name: mongo-secret  # Menetapkan nama volume yang akan di-mount
+          mountPath: /etc/mongo-credentials  # Mount path di dalam container
+          readOnly: true  # Hanya mode baca untuk volume ini
+          
+      volumes:  # Definisi volume yang akan digunakan dalam pod
+      - name: mongo-persistent-storage  # Menetapkan nama volume
+        persistentVolumeClaim:  # Menggunakan PersistentVolumeClaim untuk volume
+          claimName: mongo-pvc  # Nama PersistentVolumeClaim yang telah dibuat
+      - name: mongo-config  # Menetapkan nama volume
+        configMap:  # Menggunakan ConfigMap untuk volume
+          name: mongo-configmap  # Nama ConfigMap yang telah dibuat
+          items:
+            - key: mongo.conf  # Nama kunci dalam ConfigMap
+              path: mongo.conf  # Lokasi path dalam container
+      - name: mongo-secret  # Menetapkan nama volume
+        secret:  # Menggunakan Secret untuk volume
+          secretName: mongo-secret  # Nama Secret yang telah dibuat

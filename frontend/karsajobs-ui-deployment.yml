@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: karsajobs-ui  # Menetapkan nama untuk deployment karsajobs-ui
+  labels:
+    app: karsajobs  # Menetapkan label aplikasi karsajobs
+    tier: frontend  # Menetapkan label tier frontend
+
+spec:
+  selector:
+    matchLabels:
+      app: karsajobs  # Selector sesuai label aplikasi karsajobs
+      tier: frontend  # Selector sesuai label tier frontend
+
+  replicas: 1  # Jumlah replika (instance) yang akan dibuat
+
+  template:
+    metadata:
+      labels:
+        app: karsajobs  # Label aplikasi pada template pod
+        tier: frontend  # Label tier pada template pod
+    spec:
+      containers:
+        - name: karsajobs-ui  # Nama container adalah karsajobs-ui
+          image: ghcr.io/dionanda/karsajobs-ui:latest  # Image container dari repositori ghcr.io/dionanda/karsajobs-ui dengan tag latest
+          ports:
+            - containerPort: 8000  # Port yang akan di-forward ke dalam container

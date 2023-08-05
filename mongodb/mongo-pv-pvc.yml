@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mongo-pv  # Menetapkan nama untuk PersistentVolume mongo-pv
+  labels:
+    app: mongodb  # Menetapkan label aplikasi mongodb
+    tier: database  # Menetapkan label tier database
+
+spec:
+  storageClassName: manual  # Menetapkan kelas penyimpanan (storage class) manual
+  accessModes:
+    - ReadWriteOnce  # Mode akses: Baca-Tulis Sekali
+  capacity:
+    storage: 1Gi  # Kapasitas penyimpanan 1 GiB
+  hostPath:
+    path: "/mnt/data/mongo"  # Lokasi path di host untuk penyimpanan
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mongo-pvc  # Menetapkan nama untuk PersistentVolumeClaim mongo-pvc
+  labels:
+    app: mongodb  # Menetapkan label aplikasi mongodb
+    tier: database  # Menetapkan label tier database
+
+spec:
+  storageClassName: manual  # Menetapkan kelas penyimpanan (storage class) manual
+  accessModes:
+    - ReadWriteOnce  # Mode akses: Baca-Tulis Sekali
+  resources:
+    requests:
+      storage: 1Gi  # Permintaan kapasitas penyimpanan 1 GiB

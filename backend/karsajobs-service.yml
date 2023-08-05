@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: karsajobs  # Menetapkan nama untuk Service karsajobs
+  labels:
+    app: karsajobs  # Menetapkan label aplikasi karsajobs
+    tier: backend  # Menetapkan label tier backend
+
+spec:
+  selector:
+    app: karsajobs  # Menetapkan selector sesuai label aplikasi karsajobs
+    tier: backend  # Menetapkan selector sesuai label tier backend
+  ports:
+  - port: 8080  # Menetapkan port yang akan di-forward oleh Service
+  type: NodePort  # Menetapkan tipe Service sebagai NodePort
