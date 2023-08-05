@@ -1,0 +1,2 @@
+Link Github Packages Karsajobs: ghcr.io/dionanda/karsajobs:latest
+Link Github Packages Karsajobs UI: ghcr.io/dionanda/karsajobs-ui:latest
