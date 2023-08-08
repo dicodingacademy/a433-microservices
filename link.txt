@@ -1,2 +1,5 @@
 Link Github Packages Karsajobs: ghcr.io/dionanda/karsajobs:latest
 Link Github Packages Karsajobs UI: ghcr.io/dionanda/karsajobs-ui:latest
+
+Link Github Packages Order Service: ghcr.io/dionanda/order-service:latest
+Link Github Packages Shipping Service: ghcr.io/dionanda/shipping-service:latest︎

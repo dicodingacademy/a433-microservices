@@ -1,0 +1,20 @@
+# Versi API untuk Service
+apiVersion: v1
+# Jenis sumber daya (Service)
+kind: Service
+metadata:
+  # Nama Layanan: order-service
+  name: order-service
+spec:
+  selector:
+    # Memilih pod dengan label "app: order"
+    app: order
+  ports:
+    # Protokol TCP
+    - protocol: TCP
+      # Nama port: http-order
+      name: http-order
+      # Port eksternal
+      port: 3000
+      # Port target pada pod
+      targetPort: 3000

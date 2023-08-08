@@ -1,0 +1,41 @@
+# Versi API untuk PersistentVolume
+apiVersion: v1
+# Jenis sumber daya (PersistentVolume)
+kind: PersistentVolume
+metadata:
+  # Nama PersistentVolume: rabbitmq-pv
+  name: rabbitmq-pv
+spec:
+  capacity:
+    # Kapasitas penyimpanan: 1Gi
+    storage: 1Gi
+  accessModes:
+    # Mode akses: ReadWriteOnce
+    - ReadWriteOnce
+  # Kebijakan pengembalian PersistentVolume: Retain
+  persistentVolumeReclaimPolicy: Retain
+  # Nama kelas penyimpanan: manual
+  storageClassName: manual
+  hostPath:
+    # Path host: /data/rabbitmq-pv
+    path: /data/rabbitmq-pv
+
+---
+
+# Versi API untuk PersistentVolumeClaim
+apiVersion: v1
+# Jenis sumber daya (PersistentVolumeClaim)
+kind: PersistentVolumeClaim
+metadata:
+  # Nama PersistentVolumeClaim: rabbitmq-pvc
+  name: rabbitmq-pvc
+spec:
+  accessModes:
+    # Mode akses: ReadWriteOnce
+    - ReadWriteOnce
+  resources:
+    requests:
+      # Permintaan penyimpanan: 1Gi
+      storage: 1Gi
+  # Nama kelas penyimpanan: manual
+  storageClassName: manual

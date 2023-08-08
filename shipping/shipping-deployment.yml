@@ -1,0 +1,35 @@
+# Versi API untuk Deployment
+apiVersion: apps/v1
+# Jenis sumber daya (Deployment)
+kind: Deployment
+metadata:
+  # Nama Deployment: shipping
+  name: shipping
+spec:
+  selector:
+    matchLabels:
+      # Selektor label untuk mengidentifikasi pod
+      app: shipping
+  template:
+    metadata:
+      labels:
+        # Label untuk pod yang dibuat dari template ini
+        app: shipping
+    spec:
+      containers:
+        # Nama Kontainer: shipping
+        - name: shipping
+          # Image dari github packages
+          image: ghcr.io/dionanda/shipping-service:latest
+          ports:
+            # Port yang akan ditembakkan
+            - containerPort: 3001
+          env:
+            # Variabel Lingkungan: PORT
+            - name: PORT
+              # Nilai untuk PORT
+              value: "3001"
+            # Variabel Lingkungan: AMQP_URL
+            - name: AMQP_URL
+              # Nilai untuk AMQP_URL
+              value: "amqp://rabbitmq-service.default.svc.cluster.local:5672"

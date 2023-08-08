@@ -1,0 +1,52 @@
+# Versi API untuk StatefulSet
+apiVersion: apps/v1
+# Jenis sumber daya (StatefulSet)
+kind: StatefulSet
+metadata:
+  # Nama StatefulSet: rabbitmq
+  name: rabbitmq
+spec:
+  # Nama Layanan: rabbitmq
+  serviceName: rabbitmq
+  # Jumlah replika: 1
+  replicas: 1
+  selector:
+    matchLabels:
+      # Memilih pod dengan label "app: rabbitmq"
+      app: rabbitmq
+  template:
+    metadata:
+      labels:
+        # Label untuk pod yang dibuat dari template ini
+        app: rabbitmq
+    spec:
+      containers:
+        # Nama Kontainer: rabbitmq
+        - name: rabbitmq
+          # Image dari docker
+          image: rabbitmq:3.11-management
+          ports:
+            # Port yang akan ditembakkan
+            - containerPort: 5672
+              # Nama port: amqp
+              name: amqp
+          volumeMounts:
+            # Nama volumeMount: data-volume
+            - name: data-volume
+              # Path untuk meng-mount volume
+              mountPath: /data/rabbitmq
+          readinessProbe:
+            exec:
+              command:
+                - sh
+                - -c
+                - rabbitmq-diagnostics ping
+            initialDelaySeconds: 12
+            periodSeconds: 12
+            timeoutSeconds: 6
+      volumes:
+        # Nama volume: data-volume
+        - name: data-volume
+          persistentVolumeClaim:
+            # Nama PersistentVolumeClaim: rabbitmq-pvc
+            claimName: rabbitmq-pvc

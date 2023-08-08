@@ -1,0 +1,34 @@
+# Versi API untuk Deployment
+apiVersion: apps/v1
+# Jenis sumber daya (Deployment)
+kind: Deployment
+metadata:
+  # Nama Deployment
+  name: order
+spec:
+  selector:
+    matchLabels:
+      # Selektor label untuk mengidentifikasi pod
+      app: order
+  template:
+    metadata:
+      labels:
+        app: order
+    spec:
+      containers:
+        # Nama container
+        - name: order
+          # Image dari github packages
+          image: ghcr.io/dionanda/order-service:latest
+          ports:
+            # Port yang akan ditembakkan
+            - containerPort: 3000
+          env:
+            # Variabel Lingkungan: PORT
+            - name: PORT
+              # Nilai untuk PORT
+              value: "3000"
+            # Variabel Lingkungan: AMQP_URL
+            - name: AMQP_URL
+              # Nilai untuk AMQP_URL
+              value: "amqp://rabbitmq-service.default.svc.cluster.local:5672"

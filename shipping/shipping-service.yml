@@ -1,0 +1,20 @@
+# Versi API untuk Service
+apiVersion: v1
+# Jenis sumber daya (Service)
+kind: Service
+metadata:
+  # Nama Layanan: shipping-service
+  name: shipping-service
+spec:
+  selector:
+    # Memilih pod dengan label "app: shipping"
+    app: shipping
+  ports:
+    # Protokol TCP
+    - protocol: TCP
+      # Nama port: http-shipping
+      name: http-shipping
+      # Port eksternal
+      port: 3001
+      # Port target pada pod
+      targetPort: 3001

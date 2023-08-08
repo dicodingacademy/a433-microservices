@@ -1,0 +1,20 @@
+# Versi API untuk Service
+apiVersion: v1
+# Jenis sumber daya (Service)
+kind: Service
+metadata:
+  # Nama Layanan: rabbitmq-service
+  name: rabbitmq-service
+spec:
+  selector:
+    # Memilih pod dengan label "app: rabbitmq"
+    app: rabbitmq
+  ports:
+    # Protokol TCP
+    - protocol: TCP
+      # Nama port: tcp-rabbitmq
+      name: tcp-rabbitmq
+      # Port eksternal
+      port: 5672
+      # Port target pada pod
+      targetPort: 5672
