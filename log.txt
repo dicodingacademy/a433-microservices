@@ -1,0 +1,26 @@
+Attaching to a433-microservices-item-app-1, a433-microservices-item-db-1
+a433-microservices-item-db-1   | 2023-09-14T16:16:29.942+0000 I CONTROL  [initandlisten] MongoDB starting : pid=1 port=27017 dbpath=/data/db 64-bit host=047702e8a02b
+a433-microservices-item-db-1   | 2023-09-14T16:16:29.943+0000 I CONTROL  [initandlisten] db version v3.0.15
+a433-microservices-item-db-1   | 2023-09-14T16:16:29.943+0000 I CONTROL  [initandlisten] git version: b8ff507269c382bc100fc52f75f48d54cd42ec3b
+a433-microservices-item-db-1   | 2023-09-14T16:16:29.943+0000 I CONTROL  [initandlisten] build info: Linux ip-10-166-66-3 3.2.0-4-amd64 #1 SMP Debian 3.2.46-1 x86_64 BOOST_LIB_VERSION=1_49
+a433-microservices-item-db-1   | 2023-09-14T16:16:29.943+0000 I CONTROL  [initandlisten] allocator: tcmalloc
+a433-microservices-item-db-1   | 2023-09-14T16:16:29.943+0000 I CONTROL  [initandlisten] options: {}
+a433-microservices-item-db-1   | 2023-09-14T16:16:29.961+0000 I JOURNAL  [initandlisten] journal dir=/data/db/journal
+a433-microservices-item-db-1   | 2023-09-14T16:16:29.962+0000 I JOURNAL  [initandlisten] recover : no journal files present, no recovery needed
+a433-microservices-item-db-1   | 2023-09-14T16:16:30.104+0000 I JOURNAL  [durability] Durability thread started
+a433-microservices-item-db-1   | 2023-09-14T16:16:30.104+0000 I JOURNAL  [journal writer] Journal writer thread started
+a433-microservices-item-db-1   | 2023-09-14T16:16:30.117+0000 I NETWORK  [initandlisten] waiting for connections on port 27017
+a433-microservices-item-app-1  | 
+a433-microservices-item-app-1  | > docker-software-delivery@1.0.0 start /app
+a433-microservices-item-app-1  | > node ./bin/www
+a433-microservices-item-app-1  | 
+a433-microservices-item-app-1  | NODE_ENV: production
+a433-microservices-item-db-1   | 2023-09-14T16:16:31.069+0000 I NETWORK  [initandlisten] connection accepted from 172.18.0.3:47958 #1 (1 connection now open)
+a433-microservices-item-app-1  | Connected to database
+a433-microservices-item-app-1  | [0mGET / [36m304 [0m299.491 ms - -[0m
+a433-microservices-item-app-1  | [0mGET /javascripts/dist/dist.min.js [36m304 [0m5.034 ms - -[0m
+a433-microservices-item-app-1  | [0mGET /stylesheets/style.css [32m200 [0m45.539 ms - 519[0m
+a433-microservices-item-app-1  | [0mGET /api [32m200 [0m14.644 ms - 105[0m
+a433-microservices-item-app-1  | [0mPOST /api [32m201 [0m15.278 ms - 52[0m
+a433-microservices-item-app-1  | [0mPOST /api [32m201 [0m2.033 ms - 53[0m
+Gracefully stopping... (press Ctrl+C again to force)
