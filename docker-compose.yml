@@ -1,0 +1,19 @@
+version: '3'
+
+volumes:
+  app_db_data:
+      driver: local
+
+services:
+  item-db:
+      image: mongo:3.0
+      restart: always
+      volumes:
+        - app_db_data:/data/db
+  item-app:
+      image: ghcr.io/man20820/item-app:v1
+      ports:
+        - 80:8080
+      restart: always
+      depends_on:
+        - item-db
