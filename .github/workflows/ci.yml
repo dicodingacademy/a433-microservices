@@ -1,4 +1,4 @@
-name: CI for karsajobs  # Nama dari GitHub Actions workflow
+name: CI for karsajobs  # Nama dari GitHub Actions workflow, bisa diganti sesuai kebutuhan Anda.
 
 on:
   push:
