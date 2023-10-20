@@ -10,7 +10,7 @@ jobs:
 
   test-app:
     docker:
-      - image: golang:latest
+      - image: hadolint:latest
     steps:
       - checkout
       - run: go test -v -short --count=1 $(go list ./...)
