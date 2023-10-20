@@ -1,0 +1,26 @@
+version: 2.1
+
+jobs:
+  lint-dockerfile:
+    docker:
+      - image: hadolint/hadolint:latest
+    steps:
+      - checkout
+      - run: hadolint Dockerfile
+
+  test-app:
+    docker:
+      - image: golang:latest
+    steps:
+      - checkout
+      - run: go test -v -short --count=1 $(go list ./...)
+
+  build-app-karsajobs:
+    docker:
+      - image: docker:latest
+    steps:
+      - checkout
+      - run: go build -o karsajobs
+      - run: docker build -t ghcr.io/wahyurin/a433-microservices/karsajobs:latest .
+      - run: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin ghcr.io
+      - run: docker push ghcr.io/wahyurin/a433-microservices/karsajobs:latest
