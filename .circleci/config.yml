@@ -1,0 +1,38 @@
+version: 2.1
+
+jobs:
+  lint-dockerfile:
+    docker:
+      - image: hadolint/hadolint:latest
+    steps:
+      - checkout
+      - run: hadolint Dockerfile
+
+  test-app:
+    docker:
+      - image: golang:latest
+    steps:
+      - checkout
+      - run: go test -v -short --count=1 $(go list ./...)
+
+  build-app-karsajobs:
+    docker:
+      - image: docker:latest
+    steps:
+      - checkout
+      - run: go build -o karsajobs
+      - run: docker build -t yourdockerusername/karsajobs:latest .
+      - run: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+      - run: docker push yourdockerusername/karsajobs:latest
+
+workflows:
+  version: 2
+  karsajobs:
+    jobs:
+      - lint-dockerfile
+      - test-app:
+          requires:
+            - lint-dockerfile
+      - build-app-karsajobs:
+          requires:
+            - test-app
