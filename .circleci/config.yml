@@ -6,24 +6,31 @@ jobs:
       - image: hadolint/hadolint:latest
     steps:
       - checkout
-      - run: hadolint ./karsajobs/Dockerfile
+      - run:
+          name: Lint Dockerfile
+          command: hadolint ./karsajobs/Dockerfile
 
   test-app:
     docker:
       - image: golang:1.17
     steps:
       - checkout
-      - run: go test -v -short --count=1 $(go list ./...)
+      - run:
+          name: Run Unit Tests
+          command: go test -v -short --count=1 $(go list ./...)
 
   build-app-karsajobs:
     docker:
       - image: docker:latest
     steps:
       - checkout
-      - run: go build -o karsajobs
-      - run: docker build -t ghcr.io/wahyurin/a433-microservices/karsajobs:latest .
-      - run: echo $TOKEN | docker login ghcr.io -u WahyuriN --password-stdin
-      - run: docker push ghcr.io/wahyurin/a433-microservices/karsajobs:latest
+      - run:
+          name: Build and Push Docker Image
+          command: |
+            go build -o karsajobs
+            docker build -t ghcr.io/wahyurin/a433-microservices/karsajobs:latest .
+            echo "$TOKEN" | docker login ghcr.io -u "WahyuriN" --password-stdin
+            docker push ghcr.io/wahyurin/a433-microservices/karsajobs:latest
 
 workflows:
   version: 2
