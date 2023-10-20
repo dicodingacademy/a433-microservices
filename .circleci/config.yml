@@ -22,7 +22,7 @@ jobs:
       - checkout
       - run: go build -o karsajobs
       - run: docker build -t ghcr.io/wahyurin/a433-microservices/karsajobs:latest .
-      - run: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin ghcr.io
+      - run: echo $TOKEN | docker login ghcr.io -u WahyuriN --password-stdin
       - run: docker push ghcr.io/wahyurin/a433-microservices/karsajobs:latest
 
 workflows:
