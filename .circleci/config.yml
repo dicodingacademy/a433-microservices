@@ -6,7 +6,7 @@ jobs:
       - image: hadolint/hadolint:latest
     steps:
       - checkout
-      - run: hadolint Dockerfile
+      - run: hadolint ./Dockerfile
 
   test-app:
     docker:
