@@ -24,3 +24,15 @@ jobs:
       - run: docker build -t ghcr.io/wahyurin/a433-microservices/karsajobs:latest .
       - run: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin ghcr.io
       - run: docker push ghcr.io/wahyurin/a433-microservices/karsajobs:latest
+
+workflows:
+  version: 2
+  karsajobs-ci:
+    jobs:
+      - lint-dockerfile
+      - test-app:
+          requires:
+            - lint-dockerfile
+      - build-app-karsajobs:
+          requires:
+            - test-app
