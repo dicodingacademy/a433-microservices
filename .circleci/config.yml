@@ -2,9 +2,12 @@ version: 2.1
 jobs:
   lint-dockerfile:
     docker:
-      - image: circleci/golang:1.16
+      - image: circleci/golang:1.16-buster
     steps:
       - checkout
+      - run:
+          name: Install Git
+          command: sudo apt-get update && sudo apt-get install git -y
       - run:
           name: Install hadolint
           command: |
@@ -18,7 +21,7 @@ jobs:
 
   test-app:
     docker:
-      - image: circleci/golang:1.16
+      - image: circleci/golang:1.16-buster
     steps:
       - checkout
       - run:
@@ -27,15 +30,17 @@ jobs:
 
   build-app-karsajobs:
     docker:
-      - image: circleci/golang:1.16
+      - image: circleci/golang:1.16-buster 
     steps:
-      - checkout
+      - checkout # Ganti dengan versi Docker yang sesuai
+      - setup_remote_docker:  # Ini akan memungkinkan Anda untuk menggunakan Docker dalam Docker (DinD)
+          version: 1.16-buster # Ganti dengan versi Docker yang sesuai 
       - run:
           name: Build and push Docker image
           command: |
             # Build your Go application
             docker build -t ghcr.io/afrinaldipdg/karsajobs-circleci:v1 .
-            docker login ghcr.io -u $GITHUB_USERNAME -p $GITHUB_TOKEN
+            cat ~/token.txt | docker login --username afrinaldipdg --password-stdin ghcr.io
             docker push ghcr.io/afrinaldipdg/karsajobs-circleci:v1
 
 workflows:
