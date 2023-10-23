@@ -1,0 +1,64 @@
+version: 2.1
+jobs:
+  lint-dockerfile:
+    docker:
+      - image: circleci/golang:1.16-buster
+    steps:
+      - checkout
+      - run:
+          name: Install Git
+          command: sudo apt-get update && sudo apt-get install git -y
+      - run:
+          name: Install hadolint
+          command: |
+            mkdir -p ~/bin
+            curl -Lo ~/bin/hadolint https://github.com/hadolint/hadolint/releases/latest/download/hadolint-Linux-x86_64
+            chmod +x ~/bin/hadolint
+            sudo mv ~/bin/hadolint /usr/local/bin/hadolint
+      - run:
+          name: Run hadolint on Dockerfile
+          command: hadolint Dockerfile
+
+  test-app:
+    docker:
+      - image: circleci/golang:1.16-buster
+    steps:
+      - checkout
+      - run:
+          name: Run unit tests
+          command: go test -v -short --count=1 $(go list ./...)
+
+  build-app-karsajobs:
+    docker:
+      - image: circleci/golang:1.16-buster 
+    steps:
+      - checkout # Ganti dengan versi Docker yang sesuai
+      - setup_remote_docker:  # Ini akan memungkinkan Anda untuk menggunakan Docker dalam Docker (DinD)
+          version: 1.16-buster # Ganti dengan versi Docker yang sesuai 
+      - run:
+          name: Build and push Docker image
+          command: |
+            # Build your Go application
+            docker build -t ghcr.io/afrinaldipdg/karsajobs-circleci:v1 .
+            cat ~/token.txt | docker login --username afrinaldipdg --password-stdin ghcr.io
+            docker push ghcr.io/afrinaldipdg/karsajobs-circleci:v1
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - lint-dockerfile:
+          filters:
+            branches:
+              only:
+                - karsajobs
+      - test-app:
+          filters:
+            branches:
+              only:
+                - karsajobs
+      - build-app-karsajobs:
+          filters:
+            branches:
+              only:
+                - karsajobs
