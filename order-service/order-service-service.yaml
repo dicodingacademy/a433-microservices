@@ -1,0 +1,9 @@
+ apiVersion: v1 # Specifies the API version being used (v1 in this case).
+ kind: Service # Defines the Kubernetes resource type as a Service.
+ metadata:
+   name: order-service-svc  # Name assigned to this Service resource.
+ spec:
+   selector:
+     app: order-service  # Selects pods labeled with 'app: order-service'.
+   ports:
+     - port: 3000  # Exposes the Service on port 3000 using TCP protocol.

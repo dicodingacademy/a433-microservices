@@ -1,0 +1,27 @@
+ apiVersion: apps/v1  # Specifies the API version being used (apps/v1 in this case).
+ kind: Deployment  # Defines that this YAML describes a Kubernetes Deployment.
+ metadata:
+   name: shipping-service-deploy  # Deployment name for the shipping service
+ spec:
+   replicas: 1  # Desired number of replicas for the shipping service
+   selector:
+     matchLabels:
+       app: shipping-service  # Selector label for the shipping service app
+   template:
+     metadata:
+       labels:
+         app: shipping-service  # Label for the shipping service app
+     spec:
+       containers:
+         - name: shipping-service  # Container name for the shipping service
+           image: ghcr.io/irvanfebri/shipping-service:latest  # Container image for the shipping service
+           ports:
+             - containerPort: 3001  # Port on which the shipping service container listens
+           env:
+             - name: AMQP_PASSWORD  # Environment variable for AMQP password
+               valueFrom:
+                 secretKeyRef:
+                   name: my-rabbitmq  # Secret name for RabbitMQ credentials
+                   key: rabbitmq-password  # Secret key for RabbitMQ password
+             - name: AMQP_URL  # Environment variable for AMQP URL
+               value: "amqp://user:$(AMQP_PASSWORD)@my-rabbitmq:5672"  # Value for the AMQP URL
