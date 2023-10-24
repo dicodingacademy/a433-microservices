@@ -1,0 +1,9 @@
+ apiVersion: v1  # Specifies the API version being used (v1 in this case).
+ kind: Service   # Defines that this YAML describes a Kubernetes Service.
+ metadata:
+   name: shipping-service-svc  # Specifies the name of the Service.
+ spec:
+   selector:
+     app: shipping-service  # Defines the selector to identify the pods targeted by this service.
+   ports:
+     - port: 3001 # Specifies the port number (3001 in this case).
