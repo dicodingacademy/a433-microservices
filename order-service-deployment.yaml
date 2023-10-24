@@ -1,0 +1,27 @@
+ apiVersion: apps/v1 # Specifies the API version being used (apps/v1 in this case).
+ kind: Deployment # Defines the Kubernetes resource type as a Deployment.
+ metadata:
+   name: order-service-deploy  # Name of the Deployment resource
+ spec:
+   replicas: 1  # Specifies the desired number of replicas for the Deployment
+   selector:
+     matchLabels:
+       app: order-service  # Selects Pods based on the app label with the value order-service
+   template:
+     metadata:
+       labels:
+         app: order-service  # Labels the Pods created by this template with the app label and value order-service
+     spec:
+       containers:
+         - name: order-service  # Name of the container within the Pod
+           image: ghcr.io/lareza-farhan-wanaghi/order-service:latest  # Docker image used for the container
+           ports:
+             - containerPort: 3000  # Port on which the container listens for incoming traffic
+           env:
+             - name: AMQP_PASSWORD  # Environmental variable name for the RabbitMQ password
+               valueFrom:
+                 secretKeyRef:
+                   name: my-rabbitmq  # Name of the Secret containing the RabbitMQ password
+                   key: rabbitmq-password  # Key within the Secret to retrieve the RabbitMQ password
+             - name: AMQP_URL  # Environmental variable name for the RabbitMQ URL
+               value: "amqp://user:$(AMQP_PASSWORD)@my-rabbitmq:5672"  # Value for the RabbitMQ URL, including the username, password, and host
