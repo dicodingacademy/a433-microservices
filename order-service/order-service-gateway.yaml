@@ -1,0 +1,14 @@
+ apiVersion: networking.istio.io/v1alpha3 # Specifies the API version being used (networking.istio.io/v1alpha3 in this case).
+ kind: Gateway # Defines the Kubernetes resource type as a Gateway.
+ metadata:
+   name: order-service-gw  # Name of the Istio Gateway for the order service.
+ spec:
+   selector:
+     istio: ingressgateway  # Selector for the ingress gateway.
+   servers:
+     - port:
+         number: 80  # Port number for HTTP traffic.
+         name: http  # Name of the HTTP protocol.
+         protocol: HTTP  # Protocol used for this port (HTTP).
+       hosts:
+         - "*"  # Accepting requests from all hosts.

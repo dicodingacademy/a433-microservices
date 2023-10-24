@@ -1,0 +1,18 @@
+ apiVersion: networking.istio.io/v1alpha3  # Specifies the API version being used (networking.istio.io/v1alpha3 in this case).
+ kind: VirtualService  # Defines that this YAML describes a VirtualService Service.
+ metadata:
+   name: order-service-vs  # Name of the VirtualService
+ spec:
+   hosts:
+     - "*"  # Match all hosts
+   gateways:
+     - order-service-gw  # Use the order-service-gw gateway
+   http:
+     - match:
+         - uri:
+             exact: "/order"  # Match exact URI "/order"
+       route:
+         - destination:
+             host: order-service-svc  # Send traffic to   order-service-svc
+             port:
+               number: 3000  # Use port 3000
