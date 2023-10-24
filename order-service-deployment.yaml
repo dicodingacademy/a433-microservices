@@ -14,7 +14,7 @@
      spec:
        containers:
          - name: order-service  # Name of the container within the Pod
-           image: ghcr.io/lareza-farhan-wanaghi/order-service:latest  # Docker image used for the container
+           image: ghcr.io/irvanfebri/order-service:latest  # Docker image used for the container
            ports:
              - containerPort: 3000  # Port on which the container listens for incoming traffic
            env:
