@@ -1,0 +1,23 @@
+# Definisi StatefulSet untuk RabbitMQ
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: rabbitmq  # Nama StatefulSet
+  namespace: e-commerce  # Namespace tempat StatefulSet ditempatkan
+spec:
+  serviceName: "rabbitmq"  # Nama layanan yang akan dihubungkan ke StatefulSet
+  replicas: 1  # Jumlah replika (pod) yang akan dijalankan
+  selector:
+    matchLabels:
+      app: rabbitmq  # Selektor pod berdasarkan label "app: rabbitmq"
+  template:
+    metadata:
+      labels:
+        app: rabbitmq  # Label pada pod
+    spec:
+      containers:
+      - name: rabbitmq
+        image: rabbitmq:3.8-management  # Image RabbitMQ dengan manajemen
+        ports:
+        - containerPort: 5672  # Port RabbitMQ di dalam container
+        - containerPort: 15672  # Port manajemen RabbitMQ di dalam container

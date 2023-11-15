@@ -1,0 +1,18 @@
+# Definisi Service untuk RabbitMQ
+apiVersion: v1
+kind: Service
+metadata:
+  name: rabbitmq  # Nama Service
+  namespace: e-commerce  # Namespace tempat Service ditempatkan
+spec:
+  selector:
+    app: rabbitmq  # Selektor pod berdasarkan label "app: rabbitmq"
+  ports:
+    - protocol: TCP
+      port: 5672  # Port eksternal RabbitMQ
+      targetPort: 5672  # Port internal RabbitMQ
+      name: amqp
+    - protocol: TCP
+      port: 15672  # Port eksternal RabbitMQ Management
+      targetPort: 15672  # Port internal RabbitMQ Management
+      name: management

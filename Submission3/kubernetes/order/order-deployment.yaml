@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment # Menetapkan objek yang didefinisikan berupa Deployment
+metadata: # Menetapkan metadata untuk Deployment
+  name: order-service
+  namespace: e-commerce
+spec: # Menetapkan spesifikasi untuk deployment
+  replicas: 1 # Menentukan jumlah replika pod yang harus dijalankan
+  selector: # Mengatur dan menentukan selector yang digunakan 
+    matchLabels:
+      app: order-service
+  template: # Menentukan template untuk pod yang dibuat
+    metadata:
+      labels:
+        app: order-service
+    spec: # Menetapkan spesifikasi container yang dijalankan dan image yang digunakan
+      containers:
+      - name: order-service
+        image: ghcr.io/yahyakhaliman/order-service:latest
+        ports:
+        - containerPort: 3000 # Membuka port di dalam container untuk komunikasi
+        env: # Menetapkan environment variabel di dalam container
+        - name: PORT 
+          value: "3000"
+        - name: AMQP_URL
+          value: "amqp://rabbitmq:5672"
