@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: rabbitmq-pv  # Nama PersistentVolume
+  namespace: e-commerce # memberikan namespace ke dalam e-commerce
+spec:
+  capacity:
+    storage: 5Gi  # Kapasitas penyimpanan yang dialokasikan
+  accessModes:
+    - ReadWriteOnce  # Mode akses untuk volume, dalam hal ini, hanya bisa diakses oleh satu node pada satu waktu
+  hostPath:
+    path: "/mnt/data/rabbitmq"  # Path di host (node) untuk penyimpanan PV
+  persistentVolumeReclaimPolicy: Retain  # Kebijakan pemulihan jika PV dihapus
+
+---
+
+# pvc.yaml
+
+# Definisi PersistentVolumeClaim (PVC) untuk RabbitMQ
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: rabbitmq-pvc  # Nama PersistentVolumeClaim
+  namespace: e-commerce # memberikan namespace ke dalam e-commerce
+spec:
+  accessModes:
+    - ReadWriteOnce  # Mode akses yang cocok dengan PV
+  resources:
+    requests:
+      storage: 5Gi  # Jumlah penyimpanan yang diminta oleh PVC
