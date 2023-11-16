@@ -1,0 +1,2 @@
+https://github.com/users/YahyaKhaliman/packages/container/package/order-service
+https://github.com/users/YahyaKhaliman/packages/container/package/shipping-service
