@@ -1,0 +1,12 @@
+#Use APiversion 1
+apiVersion: v1
+#Set as configmap
+kind: ConfigMap
+##Set name & Mongo.conf location
+metadata:
+  name: mongo-config
+data:
+  #menetapkan data untuk key 
+  mongo.conf: |
+    storage:
+      dbPath: /data/db

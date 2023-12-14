@@ -1,0 +1,16 @@
+#Apiversion 1
+apiVersion: v1
+#Object type service
+kind: Service
+#Set name & Labels
+metadata:
+  name: karsajobs-ui-service #Set nama service
+  labels:
+    app: karsajobs-ui #memiliki label yang sama denga Pod (app:karsajobs-ui)
+#Type nodeport for app karsajobs-ui and set port
+spec:
+  type: NodePort #memakai type NodePort
+  selector: #Menggunakan selector untuk menargetkan Pod yang dibuat sebelumnya
+    app: karsajobs-ui #menggunakan selector app:karsajobs-ui
+  ports:
+    - port: 8000 #mengakses port 8000

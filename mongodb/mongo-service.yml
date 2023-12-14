@@ -1,0 +1,18 @@
+#Set apiversion 1
+apiVersion: v1
+#Object type service
+kind: Service
+#Set name & labels
+metadata:
+  name: mongo-service #set name objek service
+  labels: #set label service
+    app: mongoDB
+#Set ports & Selector
+spec:
+  ports:
+  - port: 27017 #mengekspos port app:mongoDB
+    protocol: TCP #set protokol
+  selector:
+    app: mongoDB #selector berdasarkan label name objek service mongo-service
+    tier: backend
+  clusterIP: None #mengekspos Service pada IP internal di Cluster (Headless Service)

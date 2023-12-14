@@ -1,0 +1,48 @@
+#Menggunakan v1
+apiVersion: apps/v1
+#Tipe jenis object Deployment
+kind: Deployment
+# Metadata untuk deployment
+metadata:
+  #Set name
+  name: karsajobs
+  #Set labels
+  labels:
+    app: karsajobs
+spec:
+  #Set replicas Pod yang akan dijalankan
+  replicas: 1
+  #Menggunakan selector untuk mengidentifikasi Pod
+  selector:
+    matchLabels: # Penyesuaian berdasarkan pod nama label app
+      app: karsajobs
+  # Template Pod yang akan di-deploy oleh Deployment
+  template:
+    metadata:
+      labels:
+        app: karsajobs
+    spec:
+      #Get the container
+      containers:
+        - name: karsajobs
+          # Image dan tag docker image yang digunakan
+          image: ghcr.io/johnardi/karsajobs:latest
+          # Set port yang akan digunakan untuk mengakses container
+          ports:
+            - containerPort: 8080
+          #Set port & DB
+          env:
+            - name: APP_PORT
+              value: "8080"
+            - name: MONGO_HOST #nilai yang diambil dari MongoDB Service
+              value: "mongo-service" #name objek service mongo-service.yml
+            - name: MONGO_USER #nilai yang diambil dari MongoDB Secret
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-credentials #name objek secret mongo-secret.yml
+                  key: MONGO_ROOT_USERNAME #get nilai
+            - name: MONGO_PASS #nilai yang diambil dari MongoDB Secret
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-credentials #name objek secret mongo-secret.yml
+                  key: MONGO_ROOT_PASSWORD #get nilai

@@ -1,0 +1,59 @@
+#  use api v1
+apiVersion: apps/v1
+# kind yang digunakan statefuleset
+kind: StatefulSet
+#Set name & Labels
+metadata:
+  name: mongo-statefulset
+  labels:
+    app: mongoDB
+spec:
+  #Replicas set to 1
+  replicas: 1
+  #set mongo backend
+  selector:
+    matchLabels:
+      app: mongoDB
+      tier: backend
+  serviceName: mongo-service #name ojek Service mongo-service.yml
+  template:
+    metadata:
+      labels:
+        app: mongoDB
+        tier: backend
+    spec:
+      containers:
+      #get image
+        - image: mongo:4.4.3
+          name: mongo-statefulset-container #nama container
+          #init username and pass
+          env:
+            - name: MONGO_INITDB_ROOT_USERNAME_FILE
+              value: /etc/mongo-credentials/MONGO_ROOT_USERNAME
+            - name: MONGO_INITDB_ROOT_PASSWORD_FILE
+              value: /etc/mongo-credentials/MONGO_ROOT_PASSWORD
+          #Set ports akses container
+          ports:
+            - containerPort: 27017
+          #Set volume mounts
+          volumeMounts:
+            - name: mongo-persistent-storage    #name mount path pada Volumes
+              mountPath: /data/db               #path lokasi
+            - name: mongo-configmap-data        #name mount path pada Volumes
+              mountPath: /config                #path lokasi
+            - name: mongo-credentials-data      #name mount path pada Volumes
+              mountPath: /etc/mongo-credentials #path lokasi
+      #Set volumes
+      volumes:
+        - name: mongo-persistent-storage #nama volume
+          persistentVolumeClaim: #tipe objek
+            claimName: mongo-pv-claim #objek PersistentVolumeClaim name
+        - name: mongo-configmap-data #nama volume
+          configMap: #tipe objek
+            name: mongo-config #objek ConfigMap name (mongo-config.yml)
+            items:
+              - key: mongo.conf
+                path: mongo.conf
+        - name: mongo-credentials-data #nama volume
+          secret: #tipe objek
+            secretName: mongo-credentials #objek Service name (mongo-service.yml)

@@ -1,0 +1,16 @@
+#User Apiversion 1
+apiVersion: v1
+#Object type service
+kind: Service
+#Set name & Labels
+metadata:
+  name: karsajobs-service #Set nama service
+  labels:
+    app: karsajobs #memiliki label yang sama dengan Pod (app:karsajobs)
+#Type nodeport for karsajobs
+spec:
+  type: NodePort #memakai type NodePort
+  selector: #Menggunakan selector untuk menargetkan Pod yang dibuat sebelumnya
+    app: karsajobs #menggunakan selector app:karsajobs
+  ports:
+  - port: 8080 #mengakses port 8080

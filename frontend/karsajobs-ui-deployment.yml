@@ -1,0 +1,38 @@
+#Use API Version 1
+apiVersion: apps/v1
+#Object type deployment
+kind: Deployment
+# Metadata untuk deployment
+metadata:
+  #Set name deployment
+  name: karsajobs-ui
+  #Set labels
+  labels:
+    app: karsajobs-ui
+spec:
+  #Set replicas Pod yang akan dijalankan
+  replicas: 2
+  #Menggunakan selector untuk mengidentifikasi Pod
+  selector:
+    matchLabels:
+      # Penyesuaian berdasarkan pod nama label app
+      app: karsajobs-ui
+  # Template Pod yang akan di-deploy oleh Deployment
+  template:
+    metadata: #metadata dengan label
+      labels:
+        app: karsajobs-ui
+    spec:
+      containers:
+          # Set name untuk container
+        - name: karsajobs-ui
+          # Image dan tag docker image yang digunakan
+          image: ghcr.io/johnardi/karsajobs-ui:latest
+          #Set port
+          ports:
+              # Set port yang akan digunakan untuk mengakses container
+            - containerPort: 8000
+          env:
+              # Name environment variable dengan nilai <ip>:<node_backend>
+            - name: VUE_APP_BACKEND
+              value: 'http://127.0.0.1:46471'

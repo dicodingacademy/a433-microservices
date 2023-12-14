@@ -1,0 +1,44 @@
+#Use Apiversion 1
+apiVersion: v1
+#Object type persistent volume
+kind: PersistentVolume
+#set name & Label
+metadata:
+  name: mongo-pv
+  labels:
+    type: local
+
+spec:
+  #Storage class name
+  storageClassName: manual
+  #Capacity 1gb
+  capacity:
+    storage: 1Gi
+  #Access mode set to Read-Write-Once
+  accessModes:
+    - ReadWriteOnce
+  #Set host path
+  hostPath:
+    path: "/data/db"
+
+---
+#Use Apiversion 1
+apiVersion: v1
+#Object type persistent volume claim
+kind: PersistentVolumeClaim
+#set name & Label
+metadata:
+  name: mongo-pv-claim
+  labels:
+    app: mongoDB
+
+spec:
+  #Set storage class name
+  storageClassName: manual
+  #Access mode set to Read-Write-Once
+  accessModes:
+    - ReadWriteOnce
+  #Capacity 1gb
+  resources:
+    requests:
+      storage: 1Gi
