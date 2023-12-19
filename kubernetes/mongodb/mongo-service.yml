@@ -1,0 +1,33 @@
+# Versi API yang digunakan
+apiVersion: v1
+
+# Jenis objek yang dibuat. Dalam hal ini Service
+kind: Service
+
+# Metadata untuk objek Service
+metadata:
+
+  # nama service
+  name: mongo-service
+
+  # label untuk objek Service
+  labels:
+
+    # Label app dengan nilai mongodb
+    app: mongodb
+
+# Spesifikasi dari Service
+spec:
+
+  # Selector untuk menentukan pod yang akan digunakan oleh Service
+  selector:
+    app: mongodb
+
+  # Port yang digunakan
+  ports:
+
+  # Port yang akan diekspos
+  - port: 27017
+
+  # Menetapkan clusterIP ke None, None berarti tidak akan memiliki cluster IP tetapi masih bisa diakses dari dalam cluster melalui mekanisme tertentu (misalnya, menggunakan headless service)
+  clusterIP: None

@@ -1,0 +1,133 @@
+# Versi API yang digunakan
+apiVersion: apps/v1
+
+# Jenis objek yang dibuat. Dalam hal ini StatefulSet
+kind: StatefulSet
+
+# Metadata untuk objek StatefulSet
+metadata:
+
+  # nama StatefulSet
+  name: mongo
+
+  # label untuk objek StatefulSet
+  labels:
+
+    # Label app dengan nilai mongodb
+    app: mongodb
+
+# Spesifikasi dari StatefulSet
+spec:
+
+  # Label Selector untuk pod
+  selector:
+    matchLabels:
+      app: mongodb
+
+  # Nama Service
+  serviceName: mongo-service
+
+  # Jumlah replica yang dibutuhkan
+  replicas: 1
+
+  # Jumlah minimum detik yang diperlukan agar pod yang baru dibuat harus siap tanpa ada container
+  minReadySeconds: 10
+
+  # Template untuk pod yang akan digunakan
+  template:
+
+    # Metadata untuk pod
+    metadata:
+
+    # Label pod
+      labels:
+        app: mongodb
+
+    # Spesifikasi dari pod
+    spec:
+
+      # Waktu maksimum dalam detik untuk pod menyelesaikan tugas mereka sebelum di-terminate secara paksa
+      terminationGracePeriodSeconds: 10
+
+      # Container yang akan digunakan di pod
+      containers:
+
+          # Image docker yang akan digunakan
+        - image: mongo:3
+
+          # Nama container
+          name: mongo
+
+          # List Environment Variabel
+          env:
+
+            # Nama Environment Variabel: "MONGO_INITDB_ROOT_USERNAME_FILE"
+          - name: MONGO_INITDB_ROOT_USERNAME_FILE
+
+            # Value Environment Variabel: "MONGO_INITDB_ROOT_USERNAME_FILE"
+            value: /etc/mongo-credentials/MONGO_ROOT_USERNAME
+
+            # Nama Environment Variabel: "MONGO_INITDB_ROOT_PASSWORD_FILE"
+          - name: MONGO_INITDB_ROOT_PASSWORD_FILE
+
+            # Value Environment Variabel: "MONGO_INITDB_ROOT_PASSWORD_FILE"
+            value: /etc/mongo-credentials/MONGO_ROOT_PASSWORD
+
+          #  Port yang akan diekspos pada alamat IP pod
+          ports:
+          - containerPort: 27017
+            name: mongo
+
+          # Volume pod yang akan dipasang ke FileSystem container
+          volumeMounts:
+
+            # Nama volume: "mongo-persistent-storage"
+          - name: mongo-persistent-storage
+
+            # Path untuk mount Volume
+            mountPath: /data/db
+
+            # Nama volume: "mongo-config"
+          - name: mongo-config
+
+            # Path untuk mount Volume
+            mountPath: /config
+
+            # Nama volume: "mongo-secret"
+          - name: mongo-secret
+
+            # Path untuk mount Volume
+            mountPath: /etc/mongo-credentials
+
+      # List volume yang dapat dipasang oleh container pod.
+      volumes:
+
+        # Nama volume: "mongo-persistent-storage"
+      - name: mongo-persistent-storage
+        persistentVolumeClaim:
+
+          # Nama PersistentVolumeClaim
+          claimName: mongo-pv-claim
+
+        # Nama volume: "mongo-config"
+      - name: mongo-config
+        configMap:
+
+          # Nama ConfigMap yang digunakan
+          name: mongo-configmap
+
+          # Item-item dalam ConfigMap yang akan di-mount
+          items:
+
+              # key dalam ConfigMap
+            - key: mongo.conf
+
+              # path dalam ConfigMap
+              path: mongo.conf
+
+        # Nama volume: "mongo-secret"
+      - name: mongo-secret
+        secret:
+
+          # Nama Secret yang digunakan oleh volume
+          secretName: mongo-secret

@@ -1,0 +1,64 @@
+# Versi API yang digunakan
+apiVersion: apps/v1
+
+# Jenis objek yang dibuat. Dalam hal ini Deployment
+kind: Deployment
+
+# Metadata untuk objek Deployment
+metadata:
+
+# Nama deployment
+  name: karsajobs-ui
+
+ # Label yang digunakan untuk selector
+  labels:
+    app: karsajobs-ui
+
+# Spesifikasi deployment
+spec:
+
+  # Jumlah replica pod yang diinginkan
+  replicas: 1
+
+  # selector label untuk pod
+  selector:
+    matchLabels:
+      app: karsajobs-ui
+
+  # Template untuk pod yang akan dibuat
+  template:
+
+    # Metadata untuk pod
+    metadata:
+
+      # Label yang diterapakn pada pod
+      labels:
+        app: karsajobs-ui
+
+    # Spesifikasi dari pod
+    spec:
+
+      # Container yang akan digunakan di pod
+      containers:
+
+        # Nama Container
+        - name: karsajobs-ui
+
+          # Image Docker yang digunakan
+          image: ghcr.io/alvitojordan/karsajobs-ui:latest
+
+          # menentukan kebijakan. IfNotPresent berarti image hanya akan diunduh bila tidak tersedia secara lokal
+          imagePullPolicy: IfNotPresent
+
+          # Port yang akan digunakan oleh container
+          ports:
+            - containerPort: 8000
+
+          # List Environment Variabel
+          env:
+
+              # Nama Environment Variable (VUE_APP_BACKEND)
+            - name: VUE_APP_BACKEND
+
+              # Value VUE_APP_BACKEND (Ambil nilai <NodeIP>:<NodePort> dari backend)
+              value: http://192.168.49.2:32404

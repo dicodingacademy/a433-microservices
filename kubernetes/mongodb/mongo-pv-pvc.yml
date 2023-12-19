@@ -1,0 +1,64 @@
+# Versi API yang digunakan
+apiVersion: v1
+
+# Jenis objek yang dibuat. Dalam hal ini PersistentVolume
+kind: PersistentVolume
+
+# Metadata untuk objek PersistentVolume
+metadata:
+
+  # Nama PersistentVolume
+  name: mongo-pv
+
+  # Tipe Volumenya local
+  labels:
+    type: local
+
+# Spesifikasi objek PersistentVolume
+spec:
+
+  # Nama Kelas Penyimpanan adalah manual
+  storageClassName: manual
+
+  # Kapasitas Penyimpanan 20 GB
+  capacity:
+    storage: 20Gi
+
+  # mode akses yang didukung: ReadWriteOnce (hanya dapat dibaca dan ditulis oleh satu node)
+  accessModes:
+    - ReadWriteOnce
+
+  # Direktori pada host
+  hostPath:
+
+    # path directory pada host
+    path: "/mnt/data"
+---
+# Versi API yang digunakan
+apiVersion: v1
+
+# Jenis objek yang dibuat. Dalam hal ini PersistentVolumeClaim
+kind: PersistentVolumeClaim
+
+# Metadata untuk objek PersistentVolumeClaim
+metadata:
+  name: mongo-pv-claim
+
+# Spesifikasi objek PersistentVolumeClaim
+spec:
+
+  # Nama Kelas Penyimpanan adalah manual
+  storageClassName: manual
+
+  # mode akses yang didukung: ReadWriteOnce (hanya dapat dibaca dan ditulis oleh satu node)
+  accessModes:
+    - ReadWriteOnce
+
+  # mempresentasikan resource minimum yang harus dimiliki volume
+  resources:
+
+    # Jumlah minimum sumber daya komputasi yang diperlukan
+    requests:
+
+      # Ukuran Penyimpanan 20 GB
+      storage: 20Gi

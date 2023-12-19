@@ -1,0 +1,33 @@
+# Versi API yang digunakan
+apiVersion: v1
+
+# Jenis objek yang dibuat. Dalam hal ini Service
+kind: Service
+
+# Metadata untuk objek Service
+metadata:
+
+  # label untuk objek Service
+  labels:
+
+    # Label app dengan nilai karsajobs-ui
+    app: karsajobs-ui
+
+  # nama service
+  name: karsajobs-ui
+
+# Spesifikasi dari Service
+spec:
+
+  # Port yang digunakan
+  ports:
+
+  # Port yang akan diekspos oleh container
+  - port: 8000
+
+  # Selector untuk menentukan pod yang akan digunakan oleh Service
+  selector:
+    app: karsajobs-ui
+
+  # Jenis Service (Nodeport membuat Service dapat diakses dari luar Cluster)
+  type: NodePort
