@@ -1,0 +1,339 @@
+2024-02-23T04:25:40.5977509Z Requested labels: ubuntu-latest
+2024-02-23T04:25:40.5977927Z Job defined at: skill-tzy/a433-microservices/.github/workflows/karsajobs-ci.yml@refs/heads/karsajobs
+2024-02-23T04:25:40.5978140Z Waiting for a runner to pick up this job...
+2024-02-23T04:25:40.7979837Z Job is waiting for a hosted runner to come online.
+2024-02-23T04:25:43.8659233Z Job is about to start running on the hosted runner: GitHub Actions 6 (hosted)
+2024-02-23T04:25:45.7109329Z Current runner version: '2.313.0'
+2024-02-23T04:25:45.7132788Z ##[group]Operating System
+2024-02-23T04:25:45.7133608Z Ubuntu
+2024-02-23T04:25:45.7133942Z 22.04.4
+2024-02-23T04:25:45.7134284Z LTS
+2024-02-23T04:25:45.7134689Z ##[endgroup]
+2024-02-23T04:25:45.7135040Z ##[group]Runner Image
+2024-02-23T04:25:45.7135491Z Image: ubuntu-22.04
+2024-02-23T04:25:45.7136318Z Version: 20240218.1.0
+2024-02-23T04:25:45.7137354Z Included Software: https://github.com/actions/runner-images/blob/ubuntu22/20240218.1/images/ubuntu/Ubuntu2204-Readme.md
+2024-02-23T04:25:45.7138798Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu22%2F20240218.1
+2024-02-23T04:25:45.7139759Z ##[endgroup]
+2024-02-23T04:25:45.7140175Z ##[group]Runner Image Provisioner
+2024-02-23T04:25:45.7140658Z 2.0.341.1
+2024-02-23T04:25:45.7141028Z ##[endgroup]
+2024-02-23T04:25:45.7143197Z ##[group]GITHUB_TOKEN Permissions
+2024-02-23T04:25:45.7144979Z Actions: write
+2024-02-23T04:25:45.7145431Z Checks: write
+2024-02-23T04:25:45.7146033Z Contents: write
+2024-02-23T04:25:45.7146503Z Deployments: write
+2024-02-23T04:25:45.7146910Z Discussions: write
+2024-02-23T04:25:45.7147386Z Issues: write
+2024-02-23T04:25:45.7147743Z Metadata: read
+2024-02-23T04:25:45.7148083Z Packages: write
+2024-02-23T04:25:45.7148549Z Pages: write
+2024-02-23T04:25:45.7148923Z PullRequests: write
+2024-02-23T04:25:45.7149426Z RepositoryProjects: write
+2024-02-23T04:25:45.7149869Z SecurityEvents: write
+2024-02-23T04:25:45.7150282Z Statuses: write
+2024-02-23T04:25:45.7150743Z ##[endgroup]
+2024-02-23T04:25:45.7153795Z Secret source: Actions
+2024-02-23T04:25:45.7154414Z Prepare workflow directory
+2024-02-23T04:25:45.7780127Z Prepare all required actions
+2024-02-23T04:25:45.7937564Z Getting action download info
+2024-02-23T04:25:45.9370512Z Download action repository 'actions/checkout@v4' (SHA:b4ffde65f46336ab88eb53be808477a3936bae11)
+2024-02-23T04:25:46.0407142Z Download action repository 'hadolint/hadolint-action@v3.1.0' (SHA:54c9adbab1582c2ef04b2016b760714a4bfde3cf)
+2024-02-23T04:25:46.3607536Z Complete job name: Test-Build-Push
+2024-02-23T04:25:46.4227941Z ##[group]Build container for action use: '/home/runner/work/_actions/hadolint/hadolint-action/v3.1.0/Dockerfile'.
+2024-02-23T04:25:46.4314466Z ##[command]/usr/bin/docker build -t ee7285:ef1d23107aa34a81b4b1a9c8cd86c861 -f "/home/runner/work/_actions/hadolint/hadolint-action/v3.1.0/Dockerfile" "/home/runner/work/_actions/hadolint/hadolint-action/v3.1.0"
+2024-02-23T04:25:46.9533070Z #0 building with "default" instance using docker driver
+2024-02-23T04:25:46.9533735Z 
+2024-02-23T04:25:46.9534024Z #1 [internal] load build definition from Dockerfile
+2024-02-23T04:25:46.9534734Z #1 transferring dockerfile: 221B done
+2024-02-23T04:25:46.9535372Z #1 DONE 0.0s
+2024-02-23T04:25:46.9535653Z 
+2024-02-23T04:25:46.9535828Z #2 [internal] load .dockerignore
+2024-02-23T04:25:46.9536665Z #2 transferring context: 2B done
+2024-02-23T04:25:46.9537262Z #2 DONE 0.0s
+2024-02-23T04:25:46.9537504Z 
+2024-02-23T04:25:46.9537897Z #3 [internal] load metadata for ghcr.io/hadolint/hadolint:v2.12.0-debian
+2024-02-23T04:25:47.2059687Z #3 DONE 0.4s
+2024-02-23T04:25:47.3143073Z 
+2024-02-23T04:25:47.3143973Z #4 [internal] load build context
+2024-02-23T04:25:47.3145089Z #4 transferring context: 9.11kB done
+2024-02-23T04:25:47.3145770Z #4 DONE 0.0s
+2024-02-23T04:25:47.3146180Z 
+2024-02-23T04:25:47.3147077Z #5 [1/3] FROM ghcr.io/hadolint/hadolint:v2.12.0-debian@sha256:27173fe25e062448490a32de410c08491c626a0bef360aa2ce5d5bdd9384b50d
+2024-02-23T04:25:47.3149263Z #5 resolve ghcr.io/hadolint/hadolint:v2.12.0-debian@sha256:27173fe25e062448490a32de410c08491c626a0bef360aa2ce5d5bdd9384b50d done
+2024-02-23T04:25:47.3151091Z #5 sha256:665ea7c2febb5533f964e122bb1f3a4d2226072269bd55139f7c00aebd464db3 740B / 740B done
+2024-02-23T04:25:47.3152510Z #5 sha256:df21c2da50822cd910a7abab5f311996c4b363cdd8f61937694873326c836650 1.27kB / 1.27kB done
+2024-02-23T04:25:47.3153893Z #5 sha256:e9995326b091af7b3ce352fad4d76cf3a3cb62b7a0c35cc5f625e8e649d23c50 2.10MB / 31.42MB 0.1s
+2024-02-23T04:25:47.3155905Z #5 sha256:405c84fd6fe2ec3923fb21bdc293f6d8c7ee5c91d7d64a25ef2a168539cc303f 0B / 2.38MB 0.1s
+2024-02-23T04:25:47.3157575Z #5 sha256:27173fe25e062448490a32de410c08491c626a0bef360aa2ce5d5bdd9384b50d 741B / 741B done
+2024-02-23T04:25:47.4146537Z #5 sha256:e9995326b091af7b3ce352fad4d76cf3a3cb62b7a0c35cc5f625e8e649d23c50 20.97MB / 31.42MB 0.2s
+2024-02-23T04:25:47.4148311Z #5 sha256:405c84fd6fe2ec3923fb21bdc293f6d8c7ee5c91d7d64a25ef2a168539cc303f 2.38MB / 2.38MB 0.1s done
+2024-02-23T04:25:47.5937209Z #5 sha256:e9995326b091af7b3ce352fad4d76cf3a3cb62b7a0c35cc5f625e8e649d23c50 31.42MB / 31.42MB 0.3s done
+2024-02-23T04:25:47.5939132Z #5 extracting sha256:e9995326b091af7b3ce352fad4d76cf3a3cb62b7a0c35cc5f625e8e649d23c50 0.1s
+2024-02-23T04:25:48.7063389Z #5 extracting sha256:e9995326b091af7b3ce352fad4d76cf3a3cb62b7a0c35cc5f625e8e649d23c50 1.2s done
+2024-02-23T04:25:48.8779430Z #5 extracting sha256:405c84fd6fe2ec3923fb21bdc293f6d8c7ee5c91d7d64a25ef2a168539cc303f 0.0s done
+2024-02-23T04:25:48.8780676Z #5 DONE 1.7s
+2024-02-23T04:25:49.0532412Z 
+2024-02-23T04:25:49.0533282Z #6 [2/3] COPY LICENSE README.md problem-matcher.json /
+2024-02-23T04:25:49.0534177Z #6 DONE 0.0s
+2024-02-23T04:25:49.0534784Z 
+2024-02-23T04:25:49.0535117Z #7 [3/3] COPY hadolint.sh /usr/local/bin/hadolint.sh
+2024-02-23T04:25:49.0535921Z #7 DONE 0.0s
+2024-02-23T04:25:49.0536515Z 
+2024-02-23T04:25:49.0536723Z #8 exporting to image
+2024-02-23T04:25:49.0537524Z #8 exporting layers
+2024-02-23T04:25:49.0797198Z #8 exporting layers 0.2s done
+2024-02-23T04:25:49.0940313Z #8 writing image sha256:9b660ed5c74c4bf2ef221200d30fcea00cf6d6afebd1775e7660512e1ba11f56 done
+2024-02-23T04:25:49.0941820Z #8 naming to docker.io/library/ee7285:ef1d23107aa34a81b4b1a9c8cd86c861 done
+2024-02-23T04:25:49.0942728Z #8 DONE 0.2s
+2024-02-23T04:25:49.1018044Z ##[endgroup]
+2024-02-23T04:25:49.1382088Z ##[group]Run actions/checkout@v4
+2024-02-23T04:25:49.1382677Z with:
+2024-02-23T04:25:49.1383032Z   repository: skill-tzy/a433-microservices
+2024-02-23T04:25:49.1383739Z   token: ***
+2024-02-23T04:25:49.1384082Z   ssh-strict: true
+2024-02-23T04:25:49.1384434Z   persist-credentials: true
+2024-02-23T04:25:49.1384883Z   clean: true
+2024-02-23T04:25:49.1385187Z   sparse-checkout-cone-mode: true
+2024-02-23T04:25:49.1385596Z   fetch-depth: 1
+2024-02-23T04:25:49.1385995Z   fetch-tags: false
+2024-02-23T04:25:49.1386332Z   show-progress: true
+2024-02-23T04:25:49.1386628Z   lfs: false
+2024-02-23T04:25:49.1387012Z   submodules: false
+2024-02-23T04:25:49.1387348Z   set-safe-directory: true
+2024-02-23T04:25:49.1387707Z ##[endgroup]
+2024-02-23T04:25:49.3001806Z Syncing repository: skill-tzy/a433-microservices
+2024-02-23T04:25:49.3004055Z ##[group]Getting Git version info
+2024-02-23T04:25:49.3005361Z Working directory is '/home/runner/work/a433-microservices/a433-microservices'
+2024-02-23T04:25:49.3006972Z [command]/usr/bin/git version
+2024-02-23T04:25:49.3007518Z git version 2.43.2
+2024-02-23T04:25:49.3009502Z ##[endgroup]
+2024-02-23T04:25:49.3024011Z Temporarily overriding HOME='/home/runner/work/_temp/6dc9f887-2869-4a29-9674-a791a046e729' before making global git config changes
+2024-02-23T04:25:49.3025782Z Adding repository directory to the temporary git global config as a safe directory
+2024-02-23T04:25:49.3027543Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/a433-microservices/a433-microservices
+2024-02-23T04:25:49.3030020Z Deleting the contents of '/home/runner/work/a433-microservices/a433-microservices'
+2024-02-23T04:25:49.3031456Z ##[group]Initializing the repository
+2024-02-23T04:25:49.3032647Z [command]/usr/bin/git init /home/runner/work/a433-microservices/a433-microservices
+2024-02-23T04:25:49.3070753Z hint: Using 'master' as the name for the initial branch. This default branch name
+2024-02-23T04:25:49.3072186Z hint: is subject to change. To configure the initial branch name to use in all
+2024-02-23T04:25:49.3073413Z hint: of your new repositories, which will suppress this warning, call:
+2024-02-23T04:25:49.3074284Z hint: 
+2024-02-23T04:25:49.3075955Z hint: 	git config --global init.defaultBranch <name>
+2024-02-23T04:25:49.3076990Z hint: 
+2024-02-23T04:25:49.3077768Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2024-02-23T04:25:49.3079198Z hint: 'development'. The just-created branch can be renamed via this command:
+2024-02-23T04:25:49.3080102Z hint: 
+2024-02-23T04:25:49.3081538Z hint: 	git branch -m <name>
+2024-02-23T04:25:49.3082809Z Initialized empty Git repository in /home/runner/work/a433-microservices/a433-microservices/.git/
+2024-02-23T04:25:49.3086168Z [command]/usr/bin/git remote add origin https://github.com/skill-tzy/a433-microservices
+2024-02-23T04:25:49.3119158Z ##[endgroup]
+2024-02-23T04:25:49.3120055Z ##[group]Disabling automatic garbage collection
+2024-02-23T04:25:49.3121519Z [command]/usr/bin/git config --local gc.auto 0
+2024-02-23T04:25:49.3149752Z ##[endgroup]
+2024-02-23T04:25:49.3150409Z ##[group]Setting up auth
+2024-02-23T04:25:49.3154772Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2024-02-23T04:25:49.3183076Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2024-02-23T04:25:49.3466094Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2024-02-23T04:25:49.3492170Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2024-02-23T04:25:49.3724694Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2024-02-23T04:25:49.3756784Z ##[endgroup]
+2024-02-23T04:25:49.3758106Z ##[group]Fetching the repository
+2024-02-23T04:25:49.3766165Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +90bf0f6d27092607b305415479a555147325716d:refs/remotes/origin/karsajobs
+2024-02-23T04:25:49.5250576Z From https://github.com/skill-tzy/a433-microservices
+2024-02-23T04:25:49.5252583Z  * [new ref]         90bf0f6d27092607b305415479a555147325716d -> origin/karsajobs
+2024-02-23T04:25:49.5279626Z ##[endgroup]
+2024-02-23T04:25:49.5280406Z ##[group]Determining the checkout info
+2024-02-23T04:25:49.5282542Z ##[endgroup]
+2024-02-23T04:25:49.5283317Z ##[group]Checking out the ref
+2024-02-23T04:25:49.5288568Z [command]/usr/bin/git checkout --progress --force -B karsajobs refs/remotes/origin/karsajobs
+2024-02-23T04:25:49.5346683Z Switched to a new branch 'karsajobs'
+2024-02-23T04:25:49.5348271Z branch 'karsajobs' set up to track 'origin/karsajobs'.
+2024-02-23T04:25:49.5354392Z ##[endgroup]
+2024-02-23T04:25:49.5387370Z [command]/usr/bin/git log -1 --format='%H'
+2024-02-23T04:25:49.5410403Z '90bf0f6d27092607b305415479a555147325716d'
+2024-02-23T04:25:49.5736912Z ##[group]Run hadolint/hadolint-action@v3.1.0
+2024-02-23T04:25:49.5737428Z with:
+2024-02-23T04:25:49.5737814Z   dockerfile: Dockerfile
+2024-02-23T04:25:49.5738196Z   recursive: false
+2024-02-23T04:25:49.5738556Z   output-file: /dev/stdout
+2024-02-23T04:25:49.5738958Z   no-color: false
+2024-02-23T04:25:49.5739283Z   no-fail: false
+2024-02-23T04:25:49.5739638Z   verbose: false
+2024-02-23T04:25:49.5740030Z   format: tty
+2024-02-23T04:25:49.5740340Z   failure-threshold: info
+2024-02-23T04:25:49.5740695Z ##[endgroup]
+2024-02-23T04:25:49.5990554Z ##[command]/usr/bin/docker run --name ee7285ef1d23107aa34a81b4b1a9c8cd86c861_626319 --label ee7285 --workdir /github/workspace --rm -e "INPUT_DOCKERFILE" -e "INPUT_CONFIG" -e "INPUT_RECURSIVE" -e "INPUT_OUTPUT-FILE" -e "INPUT_NO-COLOR" -e "INPUT_NO-FAIL" -e "INPUT_VERBOSE" -e "INPUT_FORMAT" -e "INPUT_FAILURE-THRESHOLD" -e "INPUT_OVERRIDE-ERROR" -e "INPUT_OVERRIDE-WARNING" -e "INPUT_OVERRIDE-INFO" -e "INPUT_OVERRIDE-STYLE" -e "INPUT_IGNORE" -e "INPUT_TRUSTED-REGISTRIES" -e "NO_COLOR" -e "HADOLINT_NOFAIL" -e "HADOLINT_VERBOSE" -e "HADOLINT_FORMAT" -e "HADOLINT_FAILURE_THRESHOLD" -e "HADOLINT_OVERRIDE_ERROR" -e "HADOLINT_OVERRIDE_WARNING" -e "HADOLINT_OVERRIDE_INFO" -e "HADOLINT_OVERRIDE_STYLE" -e "HADOLINT_IGNORE" -e "HADOLINT_TRUSTED_REGISTRIES" -e "HADOLINT_CONFIG" -e "HADOLINT_RECURSIVE" -e "HADOLINT_OUTPUT" -e "HOME" -e "GITHUB_JOB" -e "GITHUB_REF" -e "GITHUB_SHA" -e "GITHUB_REPOSITORY" -e "GITHUB_REPOSITORY_OWNER" -e "GITHUB_REPOSITORY_OWNER_ID" -e "GITHUB_RUN_ID" -e "GITHUB_RUN_NUMBER" -e "GITHUB_RETENTION_DAYS" -e "GITHUB_RUN_ATTEMPT" -e "GITHUB_REPOSITORY_ID" -e "GITHUB_ACTOR_ID" -e "GITHUB_ACTOR" -e "GITHUB_TRIGGERING_ACTOR" -e "GITHUB_WORKFLOW" -e "GITHUB_HEAD_REF" -e "GITHUB_BASE_REF" -e "GITHUB_EVENT_NAME" -e "GITHUB_SERVER_URL" -e "GITHUB_API_URL" -e "GITHUB_GRAPHQL_URL" -e "GITHUB_REF_NAME" -e "GITHUB_REF_PROTECTED" -e "GITHUB_REF_TYPE" -e "GITHUB_WORKFLOW_REF" -e "GITHUB_WORKFLOW_SHA" -e "GITHUB_WORKSPACE" -e "GITHUB_ACTION" -e "GITHUB_EVENT_PATH" -e "GITHUB_ACTION_REPOSITORY" -e "GITHUB_ACTION_REF" -e "GITHUB_PATH" -e "GITHUB_ENV" -e "GITHUB_STEP_SUMMARY" -e "GITHUB_STATE" -e "GITHUB_OUTPUT" -e "RUNNER_OS" -e "RUNNER_ARCH" -e "RUNNER_NAME" -e "RUNNER_ENVIRONMENT" -e "RUNNER_TOOL_CACHE" -e "RUNNER_TEMP" -e "RUNNER_WORKSPACE" -e "ACTIONS_RUNTIME_URL" -e "ACTIONS_RUNTIME_TOKEN" -e "ACTIONS_CACHE_URL" -e "ACTIONS_RESULTS_URL" -e GITHUB_ACTIONS=true -e CI=true -v "/var/run/docker.sock":"/var/run/docker.sock" -v "/home/runner/work/_temp/_github_home":"/github/home" -v "/home/runner/work/_temp/_github_workflow":"/github/workflow" -v "/home/runner/work/_temp/_runner_file_commands":"/github/file_commands" -v "/home/runner/work/a433-microservices/a433-microservices":"/github/workspace" ee7285:ef1d23107aa34a81b4b1a9c8cd86c861  "Dockerfile"
+2024-02-23T04:25:49.9092753Z 
+2024-02-23T04:25:49.9096433Z Hadolint output saved to: /dev/stdout
+2024-02-23T04:25:50.0653958Z ##[group]Run go test -v -short --count=1 $(go list ./...)
+2024-02-23T04:25:50.0654656Z ;1mgo test -v -short --count=1 $(go list ./...)
+2024-02-23T04:25:50.0697209Z shell: /usr/bin/bash -e {0}
+2024-02-23T04:25:50.0697620Z env:
+2024-02-23T04:25:50.0698091Z   HADOLINT_RESULTS: 
+2024-02-23T04:25:50.0698432Z ##[endgroup]
+2024-02-23T04:25:51.2577762Z go: downloading go.mongodb.org/mongo-driver v1.4.4
+2024-02-23T04:25:51.5809857Z go: downloading github.com/go-chi/chi v1.5.1
+2024-02-23T04:25:51.6015351Z go: downloading github.com/go-chi/cors v1.1.1
+2024-02-23T04:25:52.2661322Z go: downloading github.com/pkg/errors v0.9.1
+2024-02-23T04:25:53.1675934Z go: downloading github.com/go-stack/stack v1.8.0
+2024-02-23T04:25:53.4957939Z go: downloading github.com/golang/snappy v0.0.1
+2024-02-23T04:25:53.4965077Z go: downloading github.com/klauspost/compress v1.9.5
+2024-02-23T04:25:53.5118693Z go: downloading github.com/aws/aws-sdk-go v1.34.28
+2024-02-23T04:25:53.9946716Z go: downloading github.com/xdg/scram v0.0.0-20180814205039-7eeb5667e42c
+2024-02-23T04:25:54.0072449Z go: downloading github.com/xdg/stringprep v0.0.0-20180714160509-73f8eece6fdc
+2024-02-23T04:25:54.0147890Z go: downloading golang.org/x/crypto v0.0.0-20190530122614-20be4c3c3ed5
+2024-02-23T04:25:54.1761982Z go: downloading golang.org/x/sync v0.0.0-20190911185100-cd5d95a43a6e
+2024-02-23T04:25:54.4174417Z go: downloading golang.org/x/text v0.3.3
+2024-02-23T04:25:55.4054077Z go: downloading github.com/jmespath/go-jmespath v0.4.0
+2024-02-23T04:26:11.9665374Z ?   	github.com/nothinux/karsajobs/pkg/models	[no test files]
+2024-02-23T04:26:11.9753185Z === RUN   TestHomeHandler
+2024-02-23T04:26:11.9754254Z --- PASS: TestHomeHandler (0.00s)
+2024-02-23T04:26:11.9754679Z === RUN   TestGetJobsHandler
+2024-02-23T04:26:11.9755151Z     handlers_test.go:46: skipping integration test
+2024-02-23T04:26:11.9755766Z --- SKIP: TestGetJobsHandler (0.00s)
+2024-02-23T04:26:11.9756177Z PASS
+2024-02-23T04:26:11.9756522Z ok  	github.com/nothinux/karsajobs/cmd/web	0.006s
+2024-02-23T04:26:11.9765166Z === RUN   TestToObjID
+2024-02-23T04:26:11.9765832Z --- PASS: TestToObjID (0.00s)
+2024-02-23T04:26:11.9766427Z === RUN   TestGetJobPosts
+2024-02-23T04:26:11.9766809Z     jobs_test.go:18: skipping integration test
+2024-02-23T04:26:11.9767763Z --- SKIP: TestGetJobPosts (0.00s)
+2024-02-23T04:26:11.9768245Z === RUN   TestGetJobPost
+2024-02-23T04:26:11.9768666Z     jobs_test.go:62: skipping integration test
+2024-02-23T04:26:11.9769118Z --- SKIP: TestGetJobPost (0.00s)
+2024-02-23T04:26:11.9769575Z === RUN   TestInsertJobPost
+2024-02-23T04:26:11.9770002Z     jobs_test.go:115: skipping integration test
+2024-02-23T04:26:11.9770460Z --- SKIP: TestInsertJobPost (0.00s)
+2024-02-23T04:26:11.9770931Z === RUN   TestDeleteJobPost
+2024-02-23T04:26:11.9771351Z     jobs_test.go:149: skipping integration test
+2024-02-23T04:26:11.9771830Z --- SKIP: TestDeleteJobPost (0.00s)
+2024-02-23T04:26:11.9772252Z PASS
+2024-02-23T04:26:11.9772679Z ok  	github.com/nothinux/karsajobs/pkg/models/mongodb	0.006s
+2024-02-23T04:26:12.0391846Z ##[group]Run export GHCR_PAT_TOKEN=$GHCR_PAT_TOKEN
+2024-02-23T04:26:12.0392526Z ;1mexport GHCR_PAT_TOKEN=$GHCR_PAT_TOKEN
+2024-02-23T04:26:12.0393021Z ;1mbash ./build_push_image_karsajobs.sh
+2024-02-23T04:26:12.0420652Z shell: /usr/bin/bash -e {0}
+2024-02-23T04:26:12.0421057Z env:
+2024-02-23T04:26:12.0421429Z   HADOLINT_RESULTS: 
+2024-02-23T04:26:12.0422042Z   GHCR_PAT_TOKEN: ***
+2024-02-23T04:26:12.0422438Z ##[endgroup]
+2024-02-23T04:26:12.1927050Z #0 building with "default" instance using docker driver
+2024-02-23T04:26:12.1927689Z 
+2024-02-23T04:26:12.1928194Z #1 [internal] load build definition from Dockerfile
+2024-02-23T04:26:12.3786940Z #1 transferring dockerfile: 295B done
+2024-02-23T04:26:12.3787651Z #1 DONE 0.0s
+2024-02-23T04:26:12.3787877Z 
+2024-02-23T04:26:12.3788029Z #2 [internal] load .dockerignore
+2024-02-23T04:26:12.3788458Z #2 transferring context: 2B done
+2024-02-23T04:26:12.3788898Z #2 DONE 0.0s
+2024-02-23T04:26:12.3789108Z 
+2024-02-23T04:26:12.3789690Z #3 [auth] library/golang:pull token for registry-1.docker.io
+2024-02-23T04:26:12.3790280Z #3 DONE 0.0s
+2024-02-23T04:26:12.3790459Z 
+2024-02-23T04:26:12.3790787Z #4 [internal] load metadata for docker.io/library/golang:1.15-alpine
+2024-02-23T04:26:12.5374234Z #4 DONE 0.3s
+2024-02-23T04:26:12.6445013Z 
+2024-02-23T04:26:12.6445704Z #5 [internal] load build context
+2024-02-23T04:26:12.6446762Z #5 transferring context: 85.47kB 0.0s done
+2024-02-23T04:26:12.6447505Z #5 DONE 0.0s
+2024-02-23T04:26:12.6447858Z 
+2024-02-23T04:26:12.6448921Z #6 [1/7] FROM docker.io/library/golang:1.15-alpine@sha256:b58c367d52e46cdedc25ec9cd74cadb14ad65e8db75b25e5ec117cdb227aa264
+2024-02-23T04:26:12.6450989Z #6 resolve docker.io/library/golang:1.15-alpine@sha256:b58c367d52e46cdedc25ec9cd74cadb14ad65e8db75b25e5ec117cdb227aa264 done
+2024-02-23T04:26:12.6452747Z #6 extracting sha256:29291e31a76a7e560b9b7ad3cada56e8c18d50a96cca8a2573e4f4689d7aca77
+2024-02-23T04:26:12.6454321Z #6 sha256:dc5787428863f5e2f832b52bf7405c191c575a9b38a19ae4d0cc641079242e63 1.36kB / 1.36kB done
+2024-02-23T04:26:12.6455896Z #6 sha256:1403af3b6d4ae3d0021f289a714d4df962b6be59a7fdecf4c6363c9b0f47c340 5.13kB / 5.13kB done
+2024-02-23T04:26:12.6457383Z #6 sha256:29291e31a76a7e560b9b7ad3cada56e8c18d50a96cca8a2573e4f4689d7aca77 2.81MB / 2.81MB 0.1s done
+2024-02-23T04:26:12.6458730Z #6 sha256:e4bc8fc554c31c0fb115880309eafbbdfcbeaa5259281e59b26346027eb06831 281.50kB / 281.50kB 0.0s done
+2024-02-23T04:26:12.6460776Z #6 sha256:803daa35ea4774c1839c77f23e37057a576d5cce3a041b2e2b5f700cf3f036b9 155B / 155B 0.1s done
+2024-02-23T04:26:12.6462220Z #6 sha256:38284154e39640e51f13a639dd8dd9a8d68a41aa82f4891bac56a3a0e49f1290 2.10MB / 106.92MB 0.1s
+2024-02-23T04:26:12.6463334Z #6 sha256:a66f7597198af53100c7f92e143ffd3b724c17363091713fad62997b3bc06a5a 0B / 155B 0.1s
+2024-02-23T04:26:12.6464386Z #6 sha256:b58c367d52e46cdedc25ec9cd74cadb14ad65e8db75b25e5ec117cdb227aa264 1.65kB / 1.65kB done
+2024-02-23T04:26:12.7742127Z #6 extracting sha256:29291e31a76a7e560b9b7ad3cada56e8c18d50a96cca8a2573e4f4689d7aca77 0.1s done
+2024-02-23T04:26:12.7743712Z #6 sha256:38284154e39640e51f13a639dd8dd9a8d68a41aa82f4891bac56a3a0e49f1290 15.73MB / 106.92MB 0.2s
+2024-02-23T04:26:12.7745105Z #6 sha256:a66f7597198af53100c7f92e143ffd3b724c17363091713fad62997b3bc06a5a 155B / 155B 0.1s done
+2024-02-23T04:26:12.7747032Z #6 extracting sha256:e4bc8fc554c31c0fb115880309eafbbdfcbeaa5259281e59b26346027eb06831 0.0s done
+2024-02-23T04:26:12.9579345Z #6 sha256:38284154e39640e51f13a639dd8dd9a8d68a41aa82f4891bac56a3a0e49f1290 55.57MB / 106.92MB 0.4s
+2024-02-23T04:26:13.1451208Z #6 sha256:38284154e39640e51f13a639dd8dd9a8d68a41aa82f4891bac56a3a0e49f1290 83.89MB / 106.92MB 0.6s
+2024-02-23T04:26:13.1452391Z #6 extracting sha256:803daa35ea4774c1839c77f23e37057a576d5cce3a041b2e2b5f700cf3f036b9 done
+2024-02-23T04:26:13.2453858Z #6 sha256:38284154e39640e51f13a639dd8dd9a8d68a41aa82f4891bac56a3a0e49f1290 99.61MB / 106.92MB 0.7s
+2024-02-23T04:26:13.4425097Z #6 sha256:38284154e39640e51f13a639dd8dd9a8d68a41aa82f4891bac56a3a0e49f1290 106.92MB / 106.92MB 0.8s done
+2024-02-23T04:26:13.4426116Z #6 extracting sha256:38284154e39640e51f13a639dd8dd9a8d68a41aa82f4891bac56a3a0e49f1290 0.1s
+2024-02-23T04:26:17.1245123Z #6 extracting sha256:38284154e39640e51f13a639dd8dd9a8d68a41aa82f4891bac56a3a0e49f1290 3.6s done
+2024-02-23T04:26:17.6335736Z #6 extracting sha256:a66f7597198af53100c7f92e143ffd3b724c17363091713fad62997b3bc06a5a
+2024-02-23T04:26:17.8385587Z #6 extracting sha256:a66f7597198af53100c7f92e143ffd3b724c17363091713fad62997b3bc06a5a done
+2024-02-23T04:26:17.8387628Z #6 DONE 5.1s
+2024-02-23T04:26:17.8387970Z 
+2024-02-23T04:26:17.8388455Z #7 [2/7] WORKDIR /go/src/github.com/dicodingacademy/karsajobs
+2024-02-23T04:26:17.8389296Z #7 DONE 0.0s
+2024-02-23T04:26:17.8389542Z 
+2024-02-23T04:26:17.8390120Z #8 [3/7] COPY go.mod .
+2024-02-23T04:26:17.8390726Z #8 DONE 0.0s
+2024-02-23T04:26:17.8390962Z 
+2024-02-23T04:26:17.8391243Z #9 [4/7] COPY go.sum .
+2024-02-23T04:26:17.8392510Z #9 DONE 0.0s
+2024-02-23T04:26:17.8392821Z 
+2024-02-23T04:26:17.8393103Z #10 [5/7] RUN go mod download
+2024-02-23T04:26:21.2254461Z #10 DONE 3.5s
+2024-02-23T04:26:21.4027150Z 
+2024-02-23T04:26:21.4027785Z #11 [6/7] COPY . .
+2024-02-23T04:26:21.4028562Z #11 DONE 0.0s
+2024-02-23T04:26:21.4028848Z 
+2024-02-23T04:26:21.4029602Z #12 [7/7] RUN mkdir /build;     go build -o /build/ ./...
+2024-02-23T04:26:26.4669590Z #12 DONE 5.2s
+2024-02-23T04:26:26.6180083Z 
+2024-02-23T04:26:26.6181010Z #13 exporting to image
+2024-02-23T04:26:26.6181701Z #13 exporting layers
+2024-02-23T04:26:29.6396647Z #13 exporting layers 3.2s done
+2024-02-23T04:26:29.6531667Z #13 writing image sha256:5172b0dfeb9032ca71e12878defdd5e63f468fd2cdf89d048f9cb080a427f803 done
+2024-02-23T04:26:29.6533527Z #13 naming to docker.io/skill-tzy/karsajobs:latest done
+2024-02-23T04:26:29.6534414Z #13 DONE 3.2s
+2024-02-23T04:26:29.6828134Z WARNING! Using --password via the CLI is insecure. Use --password-stdin.
+2024-02-23T04:26:29.7827576Z WARNING! Your password will be stored unencrypted in /home/runner/.docker/config.json.
+2024-02-23T04:26:29.7829023Z Configure a credential helper to remove this warning. See
+2024-02-23T04:26:29.7830384Z https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+2024-02-23T04:26:29.7831334Z 
+2024-02-23T04:26:29.7831576Z Login Succeeded
+2024-02-23T04:26:29.8049535Z The push refers to repository [ghcr.io/skill-tzy/karsajobs]
+2024-02-23T04:26:29.8233014Z 91f63dcc881d: Preparing
+2024-02-23T04:26:29.8234141Z 449a45176430: Preparing
+2024-02-23T04:26:29.8235007Z 15e562a0bdd3: Preparing
+2024-02-23T04:26:29.8235809Z c56f87026b20: Preparing
+2024-02-23T04:26:29.8236684Z 31123fb328dd: Preparing
+2024-02-23T04:26:29.8237411Z 808cf101c223: Preparing
+2024-02-23T04:26:29.8237917Z 1cdba0ea84fc: Preparing
+2024-02-23T04:26:29.8238448Z 8ad0a1441de6: Preparing
+2024-02-23T04:26:29.8239079Z c0ed5374a14a: Preparing
+2024-02-23T04:26:29.8239603Z 6d0c7e68c043: Preparing
+2024-02-23T04:26:29.8240079Z bc276c40b172: Preparing
+2024-02-23T04:26:29.8240696Z 808cf101c223: Waiting
+2024-02-23T04:26:29.8241222Z 1cdba0ea84fc: Waiting
+2024-02-23T04:26:29.8241846Z c0ed5374a14a: Waiting
+2024-02-23T04:26:29.8242310Z 6d0c7e68c043: Waiting
+2024-02-23T04:26:29.8242812Z bc276c40b172: Waiting
+2024-02-23T04:26:29.8243425Z 8ad0a1441de6: Waiting
+2024-02-23T04:26:30.3161170Z 31123fb328dd: Pushed
+2024-02-23T04:26:30.3340278Z c56f87026b20: Pushed
+2024-02-23T04:26:30.3553320Z 449a45176430: Pushed
+2024-02-23T04:26:30.4082582Z 1cdba0ea84fc: Layer already exists
+2024-02-23T04:26:30.4143206Z 8ad0a1441de6: Layer already exists
+2024-02-23T04:26:30.4565551Z 6d0c7e68c043: Layer already exists
+2024-02-23T04:26:30.4589029Z c0ed5374a14a: Layer already exists
+2024-02-23T04:26:30.4977573Z bc276c40b172: Layer already exists
+2024-02-23T04:26:30.7106704Z 808cf101c223: Pushed
+2024-02-23T04:26:32.5227903Z 91f63dcc881d: Pushed
+2024-02-23T04:26:42.8562243Z 15e562a0bdd3: Pushed
+2024-02-23T04:26:43.5723104Z latest: digest: sha256:d9248a063ae51b4e322e764cfc3eb4a3ea1b72a7f55f4511b2bfc970ae23c462 size: 2621
+2024-02-23T04:26:43.5836475Z Post job cleanup.
+2024-02-23T04:26:43.6555701Z [command]/usr/bin/git version
+2024-02-23T04:26:43.6595633Z git version 2.43.2
+2024-02-23T04:26:43.6638588Z Temporarily overriding HOME='/home/runner/work/_temp/df3feb91-a8ec-4783-a8fd-b547967b1d5a' before making global git config changes
+2024-02-23T04:26:43.6640692Z Adding repository directory to the temporary git global config as a safe directory
+2024-02-23T04:26:43.6644738Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/a433-microservices/a433-microservices
+2024-02-23T04:26:43.6680341Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2024-02-23T04:26:43.6712020Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2024-02-23T04:26:43.6951299Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2024-02-23T04:26:43.6970909Z http.https://github.com/.extraheader
+2024-02-23T04:26:43.6981499Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2024-02-23T04:26:43.7009762Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2024-02-23T04:26:43.7487015Z Cleaning up orphan processes
+

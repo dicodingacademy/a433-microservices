@@ -1,0 +1,64 @@
+# Menggunakan apiVersion v1
+apiVersion: apps/v1
+# Specify type of Kubernetes resource
+kind: StatefulSet
+metadata:
+  # Setting statefulset name di metadata dengan mongo value
+  name: mongo
+  labels:
+    app: mongo
+spec:
+  # Setting selector dari metadata untuk statefulset
+  selector:
+    matchLabels:
+      app: mongo
+      tier: db
+  # Setting service name untuk mongo-statefulset ke mongo-service
+  serviceName: mongo-service
+  replicas: 1
+  minReadySeconds: 10
+  template:
+    # Setting selector dari metadata untuk pod
+    metadata:
+      labels:
+        app: mongo
+        tier: db
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+        # Setting container name
+      - name: mongodb
+        image: mongo
+        # Setting environment variable
+        env:
+        - name: MONGO_INITDB_ROOT_USERNAME_FILE
+          # Setting MONGO_INITDB_ROOT_USERNAME dari mount volumes
+          value: /etc/mongo-credentials/MONGO_ROOT_USERNAME
+        - name: MONGO_INITDB_ROOT_PASSWORD_FILE
+          # Setting MONGO_INITDB_ROOT_USERNAME dari mount volumes
+          value: /etc/mongo-credentials/MONGO_ROOT_PASSWORD
+        ports:
+        - containerPort: 27017
+          name: mongo
+        # Config mount volumes untuk persistent-storage, config-mount dan secret-mount
+        volumeMounts:
+        - name: mongo-persistent-storage
+          mountPath: /data/db
+        - name: config-mount
+          mountPath: /config
+        - name: secret-mount
+          mountPath: /etc/mongo-credentials
+      volumes:
+      - name: secret-mount
+        secret:
+          secretName: mongo-secret
+      - name: config-mount
+        configMap:
+          name: mongo-configmap
+          items:
+            - key: mongo.conf
+              path: mongo.conf
+        # claim persistent storage
+      - name: mongo-persistent-storage
+        persistentVolumeClaim:
+          claimName: mongo-pvc

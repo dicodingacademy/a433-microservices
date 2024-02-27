@@ -1,0 +1,15 @@
+# Menggunakan apiVersion v1
+apiVersion: v1
+# Specify type of Kubernetes resource
+kind: Service
+metadata:
+  # Setting service name di metadata dengan mongo-service value
+  name: mongo-service
+spec:
+  # Setting selector dari deployment untuk service
+  selector:
+    app: mongo
+  ports:
+  - port: 27017
+    protocol: TCP
+  clusterIP: None

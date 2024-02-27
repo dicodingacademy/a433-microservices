@@ -1,0 +1,46 @@
+# Menggunakan apiVersion v1
+apiVersion: apps/v1
+# Specify type of Kubernetes resource
+kind: Deployment
+metadata:
+  # Setting deployment name di metadata dengan karsajobs value
+  name: karsajobs
+  labels:
+    # Setting label dengan app karsajobs
+    app: karsajobs
+spec:
+  replicas: 1
+  # Setting selector dari metadata untuk deployment
+  selector:
+    matchLabels:
+      app: karsajobs
+  template:
+    # Setting selector dari metadata untuk pod
+    metadata:
+      labels:
+        app: karsajobs
+    spec:
+      containers:
+        # Setting container name
+      - name: karsajobs
+        # Setting image
+        image: ghcr.io/skill-tzy/karsajobs:latest
+        # Setting environment variable
+        env:
+        - name: APP_PORT
+          value: "8080"
+          # Setting MONGO_USER dan MONGO_PASS dari secret
+        - name: MONGO_USER
+          valueFrom:
+            secretKeyRef:
+              name: mongo-secret
+              key: MONGO_ROOT_USERNAME
+        - name: MONGO_PASS
+          valueFrom:
+            secretKeyRef:
+              name: mongo-secret
+              key: MONGO_ROOT_PASSWORD
+        - name: MONGO_HOST
+          value: mongo-service
+        ports:
+        - containerPort: 8080
