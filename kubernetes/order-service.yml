@@ -1,0 +1,21 @@
+# Menggunaka apiVersion v1
+apiVersion: v1
+# Menentukan jenis Kind
+kind: Service
+# Config order-service
+metadata:
+  # Menentukan nama order-service
+  name: order-service
+  # Menentukan label order-service
+  labels:
+    name: order-service
+spec:
+  # Spesifikasi untuk type dari service adalah NodePort
+  type: NodePort
+  # Spesifikasi untuk selector
+  selector:
+    name: order-service
+  ports:
+    - port: 3000
+      name: http
+

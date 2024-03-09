@@ -1,0 +1,7 @@
+# Image order-service
+
+https://github.com/skill-tzy/a433-microservices/pkgs/container/order-service
+
+# Image shipping-service
+
+https://github.com/skill-tzy/a433-microservices/pkgs/container/shipping-service

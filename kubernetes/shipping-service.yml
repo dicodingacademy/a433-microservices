@@ -1,0 +1,20 @@
+# Menggunaka apiVersion v1
+apiVersion: v1
+# Menentukan jenis Kind
+kind: Service
+# Config shipping-service
+metadata:
+  # Menentukan nama shipping-service
+  name: shipping-service
+  # Menentukan label shipping-service
+  labels:
+    name: shipping-service
+spec:
+  # Spesifikasi untuk type dari service adalah NodePort
+  type: NodePort
+  # Spesifikasi untuk selector
+  selector:
+    name: shipping-service
+  ports:
+    - port: 3001
+      name: http

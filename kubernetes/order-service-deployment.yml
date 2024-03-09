@@ -1,0 +1,39 @@
+# Menggunakan apiVersion v1
+apiVersion: apps/v1
+# Specify type dari Kind
+kind: Deployment
+# Config order-service-deployment
+metadata:
+  # Menentukan nama order-service
+  name: order
+  # Menentukan label order-service
+  labels:
+    name: order
+spec:
+  # Menentukan jumlah replika
+  replicas: 1
+  # Spesifikasi untuk Selektor
+  selector:
+    matchLabels:
+      name: order
+  # Spesifikasi template untuk Deplotment
+  template:
+    metadata:
+      labels:
+        name: order
+    # Spesifikasi spec container
+    spec:
+      containers:
+        # Menentukan nama container
+        - name: order
+          # Menentukan image dari Github Container Registry
+          image: ghcr.io/skill-tzy/order-service:latest
+          # Setting environment
+          env:
+            - name: "PORT"
+              value: "3000"
+            - name: AMQP_URL
+              # Setting value rabbitmq http://user:password@service:port
+              value: amqp://user:TxyM42qSzNaXEBWk@myrabbitmq.default.svc.cluster.local:5672
+          ports:
+            - containerPort: 3000

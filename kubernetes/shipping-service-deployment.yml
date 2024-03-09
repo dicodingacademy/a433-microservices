@@ -1,0 +1,39 @@
+# Menggunakan apiVersion v1
+apiVersion: apps/v1
+# Specify type dari Kind
+kind: Deployment
+# Config shipping-service-deployment
+metadata:
+  # Menentukan nama order-service
+  name: shipping
+  # Menentukan label order-service
+  labels:
+    name: shipping
+spec:
+  # Menentukan jumlah replika
+  replicas: 1
+  # Spesifikasi untuk Selektor
+  selector:
+    matchLabels:
+      name: shipping
+  # Spesifikasi template untuk Deplotment
+  template:
+    metadata:
+      labels:
+        name: shipping
+    # Spesifikasi spec container
+    spec:
+      containers:
+        # Menentukan nama container
+        - name: shipping
+          # Menentukan image dari Github Container Registry
+          image: ghcr.io/skill-tzy/shipping-service:latest
+          # Setting environment
+          env:
+            - name: "PORT"
+              value: "3001"
+            - name: AMQP_URL
+              # Setting value rabbitmq http://user:password@service:port
+              value: amqp://user:TxyM42qSzNaXEBWk@myrabbitmq.default.svc.cluster.local:5672
+          ports:
+            - containerPort: 3001
