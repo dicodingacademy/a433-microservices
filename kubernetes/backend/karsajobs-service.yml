@@ -1,0 +1,19 @@
+# Menggunakan apiVersion v1
+apiVersion: v1
+kind: Service
+metadata:
+  # Setting service name di metadata dengan karsajobs-service value
+  name: karsajobs-service
+  labels:
+    # Setting label dengan app karsajobs
+    app: karsajobs
+spec:
+  # Setting service type untuk NodePort
+  type: NodePort
+  # Setting selector dari metadata untuk service
+  selector:
+    app: karsajobs
+  ports:
+  # - protocol: TCP
+  - port: 8080
+    targetPort: 8080

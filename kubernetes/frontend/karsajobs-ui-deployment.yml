@@ -1,0 +1,32 @@
+# Menggunakan apiVersion v1
+apiVersion: apps/v1
+# Specify type of Kubernetes resource
+kind: Deployment
+metadata:
+  # Setting deployment name di metadata dengan karsajobs-ui value
+  name: karsajobs-ui
+  # Setting label dengan app karsajobs-ui
+  labels:
+    app: karsajobs-ui
+spec:
+  replicas: 1
+   # Setting selector dari metadata untuk deployment
+  selector:
+    matchLabels:
+      app: karsajobs-ui
+  template:
+    # Setting selector dari metadata untuk pod
+    metadata:
+      labels:
+        app: karsajobs-ui
+    spec:
+      containers:
+        # Setting container name
+      - name: karsajobs-ui
+        image: ghcr.io/skill-tzy/karsajobs-ui:latest
+        # Setting environment variable
+        env:
+        - name: VUE_APP_BACKEND
+          value: http://192.168.49.2:32339
+        ports:
+        - containerPort: 8000

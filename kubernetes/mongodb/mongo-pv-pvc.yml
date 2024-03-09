@@ -1,0 +1,36 @@
+# Menggunakan apiVersion v1
+apiVersion: v1
+# Specify type of Kubernetes resource
+kind: PersistentVolume
+metadata:
+  # Setting persistent volume name di metadata dengan mongo-pv value
+  name: mongo-pv
+  labels:
+    type: local
+spec:
+  # Setting persistent volume size
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: manual
+  hostPath:
+    # Setting host path
+    path: "/data/db"
+
+---
+# Menggunakan apiVersion v1
+apiVersion: v1
+# Specify type of Kubernetes resource
+kind: PersistentVolumeClaim
+metadata:
+  # Setting persistent volume claim name di metadata dengan mongo-pvc value
+  name: mongo-pvc
+spec:
+  # Set persistent volume claim size
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3Gi
