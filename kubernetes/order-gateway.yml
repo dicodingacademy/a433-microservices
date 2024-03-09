@@ -1,0 +1,45 @@
+# Menentukan apiVersion
+apiVersion: networking.istio.io/v1alpha3
+# Menentukan type Kind
+kind: Gateway
+# Configuration
+metadata:
+  # Menentukan nama
+  name: order-gateway
+spec:
+  selector:
+    # Menggunakan Default istio Controller
+    istio: ingressgateway
+  servers:
+  # Spesifikasi gateway
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    # Gunakan hosts listen all
+    hosts:
+    - "*"
+---
+# Menentukan
+apiVersion: networking.istio.io/v1alpha3
+# Menentukan type Kind
+kind: VirtualService
+metadata:
+  # Menentukan nama 
+  name: order
+spec:
+  # Gunakan hosts listen all
+  hosts:
+  - "*"
+  gateways:
+  - order-gateway
+  # Spesifikasi yang mengarah ke service order-service
+  http:
+  - match:
+    - uri:
+        exact: /order
+    route:
+    - destination:
+        host: order-service
+        port:
+          number: 3000
