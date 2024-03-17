@@ -15,5 +15,5 @@ services:
     depends_on:
       - rabbitmq
     environment:
-      AMQP_URL: "amqp://rabbitmq:5672"
+      AMQP_URL: "amqp://guest:guest@localhost:5672"
       PORT: 3000
