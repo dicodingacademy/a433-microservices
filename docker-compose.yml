@@ -1,0 +1,19 @@
+version: '3'
+services:
+  rabbitmq:
+    image: rabbitmq:3.8-management-alpine
+    ports:
+      - "5672:5672"
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+  
+  order-service:
+    build: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      - rabbitmq
+    environment:
+      AMQP_URL: "amqp://rabbitmq:5672"
+      PORT: 3000
